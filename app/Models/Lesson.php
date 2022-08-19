@@ -13,7 +13,7 @@ class Lesson extends Model
         return $this->hasOne(Course::class, 'course_id');
     }
 
-    public function teacher(){
+    public function teachers(){
         return $this->belongsToMany(Lesson::class, 'teacher_lessons','teacher_id','lesson_id');
     }
 }

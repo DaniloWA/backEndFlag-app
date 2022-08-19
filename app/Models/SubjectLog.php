@@ -9,7 +9,7 @@ class SubjectLog extends Model
 {
     use HasFactory;
 
-    public function subject(){
+    public function subjects(){
         return $this->belongsToMany(Subject::class, 'subject_logs','student_log_id','subject_id');
     }
 }

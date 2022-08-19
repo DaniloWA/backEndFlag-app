@@ -9,6 +9,18 @@ class Course extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'uuid',
+        'name',
+        'slug',
+        'departament_id',
+    ];
+
     public function departament(){
         return $this->hasOne(Departament::class, 'departament_id');
     }
