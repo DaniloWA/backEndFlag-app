@@ -19,14 +19,13 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('slug');
 
-            $table->string('name');
+            $table->string('first_name');
             $table->string('last_name');
-            $table->boolean('status');
+            $table->boolean('status')->default(false);
 
             $table->timestamps();
 
-
-            $table->foreign('departament_id')->references('id')->on('departaments')->onDelete('cascade');;
+            $table->foreign('departament_id')->references('id')->on('departaments')->onDelete('cascade');
         });
     }
 

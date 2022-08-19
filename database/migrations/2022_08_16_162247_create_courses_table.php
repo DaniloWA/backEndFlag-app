@@ -16,14 +16,12 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('departament_id');
-            
             $table->uuid('uuid')->unique();
             $table->string('slug');
 
             $table->string('name');
 
             $table->timestamps();
-
 
             $table->foreign('departament_id')->references('id')->on('departaments')->onDelete('cascade');;
         });

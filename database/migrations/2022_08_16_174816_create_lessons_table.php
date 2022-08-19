@@ -19,7 +19,8 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('slug');
 
-            $table->string('period',10);
+            $table->string('lesson_identification_name');
+            $table->enum('period', ['morning', 'afternoon','night'])->default('morning');
             $table->integer('num_registered_students')->comment('Number of students registered in the lesson');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

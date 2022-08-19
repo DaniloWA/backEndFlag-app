@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('subject_logs', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
+            $table->string('slug');
             $table->unsignedBigInteger('student_log_id');
             $table->unsignedBigInteger('subject_id');
 

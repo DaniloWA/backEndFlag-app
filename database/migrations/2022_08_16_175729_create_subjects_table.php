@@ -19,6 +19,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('slug');
 
+            $table->string('name');
             $table->integer('workload');
             $table->mediumText('description')->nullable();
             $table->integer('num_registered_students')->comment('Number of students registered in the subjects');
