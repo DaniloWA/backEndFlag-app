@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\course;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +24,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        return view('app.courses');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +33,6 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
