@@ -61,8 +61,8 @@ class ApiStudentsController extends Controller
      */
     public function show($id)
     {
-
-        $student = $this->student->find($id);
+        $student = $this->student->with('lesson')->where('lesson_id', $id)->first();
+        dd($student);
         if($student === null){
             return response()->json('Recurso pesquisado não existe!',404);
         }

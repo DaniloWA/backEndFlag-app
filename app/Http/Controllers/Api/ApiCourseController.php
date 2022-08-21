@@ -61,8 +61,9 @@ class ApiCourseController extends Controller
      */
     public function show($id)
     {
+        $course = $this->course->with('departament')->where('id',$id)->toSql();
+        dd($course);
 
-        $course = $this->course->find($id);
         if($course === null){
             return response()->json('Recurso pesquisado não existe!',404);
         }
@@ -75,7 +76,7 @@ class ApiCourseController extends Controller
      * @param  \App\Models\course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(course $course)
+    public function edit(Course $course)
     {
         //
     }
