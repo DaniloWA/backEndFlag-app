@@ -9,8 +9,30 @@ class Lesson extends Model
 {
     use HasFactory;
 
+    /* Table Name */
+    protected $table = 'lessons';
+
+    /* Primary Key */
+    protected $primaryKey = 'id';
+
+    /* Timestamps */
+    public $timestamps = true;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+
+    ];
+
     public function course(){
         return $this->hasOne(Course::class, 'course_id');
+    }
+
+    public function student(){
+        return $this->belongsTo(Student::class);
     }
 
     public function teachers(){

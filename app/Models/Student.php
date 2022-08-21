@@ -10,6 +10,20 @@ class Student extends Model
 {
     use HasFactory;
 
+    /* Table Name */
+    protected $table = 'students';
+
+    /* Primary Key */
+    protected $primaryKey = 'id';
+
+    /* Timestamps */
+    public $timestamps = true;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'uuid',
         'slug',

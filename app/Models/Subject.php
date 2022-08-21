@@ -9,6 +9,15 @@ class Subject extends Model
 {
     use HasFactory;
 
+    /* Table Name */
+    protected $table = 'subjects';
+
+    /* Primary Key */
+    protected $primaryKey = 'id';
+
+    /* Timestamps */
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *

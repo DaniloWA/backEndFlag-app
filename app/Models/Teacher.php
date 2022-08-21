@@ -9,6 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Teacher extends Model
 {
     use HasFactory;
+
+    /* Table Name */
+    protected $table = 'teachers';
+
+    /* Primary Key */
+    protected $primaryKey = 'id';
+
+    /* Timestamps */
+    public $timestamps = true;
+
       /**
      * The attributes that are mass assignable.
      *

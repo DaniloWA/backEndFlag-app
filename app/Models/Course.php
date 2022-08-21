@@ -10,6 +10,15 @@ class Course extends Model
 {
     use HasFactory;
 
+    /* Table Name */
+    protected $table = 'courses';
+
+    /* Primary Key */
+    protected $primaryKey = 'id';
+
+    /* Timestamps */
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,7 +57,15 @@ class Course extends Model
     }
 
     public function departament(){
-        return $this->hasOne(Departament::class, 'departament_id');
+        return $this->hasOne(Departament::class, 'departament_id','id');
+    }
+
+    public function student(){
+        return $this->belongsTo(Student::class);
+    }
+
+    public function lesson(){
+        return $this->belongsTo(Lesson::class);
     }
 
     public function subjects(){
