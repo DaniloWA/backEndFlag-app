@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 
@@ -28,11 +28,12 @@ Route::fallback(function(){
 
 
 Route::prefix('app')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
+    Route::get('/home', [HomeController::class, 'index'])->name('app.home');
     Route::resource('/students', StudentController::class)->name('index','app.students');
     Route::resource('/teachers', TeacherController::class)->name('index','app.teachers');
     Route::resource('/courses', CourseController::class)->name('index','app.courses');
 });
+
 
 
 
