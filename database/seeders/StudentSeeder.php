@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Course;
-use App\Models\Lesson;
 use App\Models\Student;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,10 +19,7 @@ class StudentSeeder extends Seeder
         Student::factory(300)->create([
             'course_id' => function (array $attributes) {
                 return Course::inRandomOrder()->first();
-            },
-            'lesson_id' => function (array $attributes) {
-                return Lesson::inRandomOrder()->first();
-            },
+            }
         ]);
     }
 }

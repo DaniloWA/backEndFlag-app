@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('lesson_id');
             $table->uuid('uuid')->unique();
             $table->string('slug');
 
@@ -36,7 +35,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
         });
     }
 

@@ -19,14 +19,12 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             TeacherSeeder::class,
             CourseSeeder::class,
-            LessonSeeder::class,
             SubjectSeeder::class,
             TeacherSubjectSeeder::class,
             CourseSubjectSeeder::class,
             StudentSeeder::class,
             StudentLogSeeder::class,
             SubjectLogSeeder::class,
-            TeacherLessonSeeder::class,
         ]);
     }
 }

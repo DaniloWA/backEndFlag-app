@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Course;
-use App\Models\Lesson;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -40,9 +39,6 @@ class StudentFactory extends Factory
             'postal_code' => $this->faker->postcode(),
             'course_id' => function (array $attributes) {
                 return Course::factory()->create();
-            },
-            'lesson_id' => function (array $attributes) {
-                return Lesson::factory()->create();
             }
         ];
     }
