@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Repositories\Api\CourseRepository;
 use Illuminate\Http\Request;
 
 class ApiCourseController extends Controller
@@ -15,16 +16,28 @@ class ApiCourseController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = $this->course->all();
+        $courseRepository = new CourseRepository($this->course);
 
-        if($courses === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+        if($request->has('departament_filters')){
+            $courseRepository->selectAttributesRelation('departament:id,'.$request->departament_filters);
+        } else {
+            $courseRepository->selectAttributesRelation('departament');
         }
-        return response()->json($courses,200);
+
+        if($request->has('where_filters')){
+            $courseRepository->where_filters($request->where_filters);
+        }
+
+        if( $request->has('course_filters')){
+            $courseRepository->selectAttributes('departament_id,'.$request->course_filters);
+        }
+
+        return response()->json($courseRepository->getResult(), 200);
     }
 
     /**
@@ -45,7 +58,6 @@ class ApiCourseController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate($this->course->rules(),$this->course->feedback());
 
         $course = $this->course->create($request->all());
@@ -61,8 +73,7 @@ class ApiCourseController extends Controller
      */
     public function show($id)
     {
-        $course = $this->course->with('departament')->where('id',$id)->toSql();
-        dd($course);
+        $course = $this->course->with('departament')->find($id);
 
         if($course === null){
             return response()->json('Recurso pesquisado não existe!',404);

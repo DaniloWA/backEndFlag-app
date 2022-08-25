@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Repositories\Api\TeacherRepository;
 
 class ApiTeacherController extends Controller
 {
@@ -15,16 +16,28 @@ class ApiTeacherController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = $this->teacher->all();
+        $teacherRepository = new TeacherRepository($this->teacher);
 
-        if($teachers === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+        if($request->has('departament_filters')){
+            $teacherRepository->selectAttributesRelation('departament:id,'.$request->departament_filters);
+        } else {
+            $teacherRepository->selectAttributesRelation('departament');
         }
-        return response()->json($teachers,200);
+
+        if($request->has('where_filters')){
+            $teacherRepository->where_filters($request->where_filters);
+        }
+
+        if( $request->has('teacher_filters')){
+            $teacherRepository->selectAttributes('departament_id,'.$request->teacher_filters);
+        }
+
+        return response()->json($teacherRepository->getResult(), 200);
     }
 
     /**
@@ -61,7 +74,8 @@ class ApiTeacherController extends Controller
     public function show($id)
     {
 
-        $teacher = $this->teacher->find($id);
+        $teacher = $this->teacher->with('departament')->find($id);
+
         if($teacher === null){
             return response()->json('Recurso pesquisado não existe!',404);
         }

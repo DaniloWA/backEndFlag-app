@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Student;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Api\StudentRepository as ApiStudentRepository;
 
 class ApiStudentsController extends Controller
 {
@@ -16,16 +16,28 @@ class ApiStudentsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = $this->student->all();
+        $studentRepository = new ApiStudentRepository($this->student);
 
-        if($students === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+        if($request->has('course_filters')){
+            $studentRepository->selectAttributesRelation('course:id,'.$request->course_filters);
+        } else {
+            $studentRepository->selectAttributesRelation('course');
         }
-        return response()->json($students,200);
+
+        if($request->has('where_filters')){
+            $studentRepository->where_filters($request->where_filters);
+        }
+
+        if( $request->has('student_filters')){
+            $studentRepository->selectAttributes('course_id,'.$request->student_filters);
+        }
+
+        return response()->json($studentRepository->getResult(), 200);
     }
 
     /**
@@ -46,10 +58,10 @@ class ApiStudentsController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate($this->student->rules(),$this->student->feedback());
 
         $student = $this->student->create($request->all());
+
         return response()->json($student,201);
     }
 
@@ -61,8 +73,7 @@ class ApiStudentsController extends Controller
      */
     public function show($id)
     {
-        $student = $this->student->with('lesson')->where('lesson_id', $id)->first();
-        dd($student);
+        $student = $this->student->with('course')->find($id);
         if($student === null){
             return response()->json('Recurso pesquisado não existe!',404);
         }
