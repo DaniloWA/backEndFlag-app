@@ -33,8 +33,8 @@ class Course extends Model
 
     public function rules(){
         return [
-        'uuid' => 'required|unique:courses,uuid,'.$this->id.'',
-        'slug' => 'required',
+        //'uuid' => 'required|unique:courses,uuid,'.$this->id.'',
+        //'slug' => 'required',
         'name' => 'required|min:3',
         'departament_id' => 'exists:departaments,id',
         ];
@@ -43,7 +43,7 @@ class Course extends Model
     public function feedback() {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'uuid.unique' => 'O uuid do curso já existe!'
+            //'uuid.unique' => 'O uuid do curso já existe!'
         ];
     }
 
@@ -57,15 +57,11 @@ class Course extends Model
     }
 
     public function departament(){
-        return $this->hasOne(Departament::class, 'departament_id','id');
+        return $this->belongsTo(Departament::class,'departament_id','id');
     }
 
     public function student(){
-        return $this->belongsTo(Student::class);
-    }
-
-    public function lesson(){
-        return $this->belongsTo(Lesson::class);
+        return $this->hasMany(Student::class,'student_id','id');
     }
 
     public function subjects(){

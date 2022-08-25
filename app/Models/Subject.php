@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subject extends Model
 {
@@ -33,12 +34,40 @@ class Subject extends Model
         'departament_id',
     ];
 
+        public function rules(){
+        return [
+        //'uuid' => 'required|unique:courses,uuid,'.$this->id.'',
+        //'slug' => 'required',
+        'name' => 'required|min:3',
+        'workload' => 'required',
+        'description' => 'required',
+        'num_registered_students' => 'required',
+        'departament_id' => 'exists:departaments,id',
+        ];
+    }
+
+    public function feedback() {
+        return [
+            'required' => 'O campo :attribute é obrigatório',
+            //'uuid.unique' => 'O uuid do curso já existe!'
+        ];
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = (string) Str::uuid();
+            $model->slug = Str::slug($model->name);
+        });
+    }
+
     public function departament(){
-        return $this->hasOne(Departament::class, 'departament_id');
+        return $this->belongsTo(Departament::class, 'departament_id');
     }
 
     public function teachers(){
-        return $this->belongsToMany(Teacher::class, 'teacher_subjects','teacher_id','subject_id');
+        return $this->hasMany(Teacher::class, 'teacher_subjects','teacher_id','subject_id');
     }
 
     public function courses(){
@@ -46,7 +75,7 @@ class Subject extends Model
     }
 
     public function students(){
-        return $this->belongsToMany(Student::class, 'student_subjects','student_id','subject_id');
+        return $this->hasMany(Student::class, 'student_subjects','student_id','subject_id');
     }
 
     public function subjectLogs(){

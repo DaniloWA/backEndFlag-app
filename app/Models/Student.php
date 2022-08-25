@@ -40,7 +40,6 @@ class Student extends Model
         'street_name',
         'postal_code',
         'course_id',
-        'lesson_id',
     ];
 
     public function rules(){
@@ -60,14 +59,13 @@ class Student extends Model
         'street_name' => 'required',
         'postal_code' => 'required|min:4',
         'course_id' => 'exists:courses,id',
-        'lesson_id' => 'exists:lessons,id',
         ];
     }
 
     public function feedback() {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'uuid.unique' => 'O UUID do estudante já existe!'
+            //'uuid.unique' => 'O UUID do estudante já existe!'
         ];
     }
 
@@ -81,14 +79,10 @@ class Student extends Model
     }
 
     public function course(){
-        return $this->hasOne(Course::class, 'course_id');
-    }
-
-    public function lesson(){
-        return $this->hasOne(Lesson::class, 'lesson_id');
+        return $this->belongsTo(Course::class, 'course_id','id');
     }
 
     public function subjects(){
-        return $this->belongsToMany(Subject::class, 'student_subjects','student_id','subject_id');
+        return $this->hasMany(Subject::class, 'student_subjects','student_id','subject_id');
     }
 }

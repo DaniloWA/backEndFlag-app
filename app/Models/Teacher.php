@@ -34,8 +34,8 @@ class Teacher extends Model
     ];
     public function rules(){
         return [
-        'uuid' => 'required|unique:teachers,uuid,'.$this->id.'',
-        'slug' => 'required',
+        //'uuid' => 'required|unique:teachers,uuid,'.$this->id.'',
+        //'slug' => 'required',
         'first_name' => 'required|min:3',
         'last_name' => 'required|min:3',
         'status' => 'required',
@@ -46,7 +46,7 @@ class Teacher extends Model
     public function feedback() {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'uuid.unique' => 'O uuid do professor já existe!'
+            //'uuid.unique' => 'O uuid do professor já existe!'
         ];
     }
 
@@ -60,14 +60,10 @@ class Teacher extends Model
     }
 
     public function departament(){
-        return $this->hasOne(Departament::class, 'departament_id');
+        return $this->belongsTo(Departament::class);
     }
 
     public function subjects(){
         return $this->belongsToMany(Subject::class, 'teacher_subjects','teacher_id','subject_id');
-    }
-
-    public function lessons(){
-        return $this->belongsToMany(Lesson::class, 'teacher_lessons','teacher_id','lesson_id');
     }
 }
