@@ -21,9 +21,9 @@ return new class extends Migration
 
             $table->string("first_name");
             $table->string('last_name');
-            $table->integer('nif');
+            $table->string('nif');
             $table->boolean('status')->default(false);
-            $table->enum('sex', ['M', 'F']);
+            $table->enum('sex', ['M', 'F','O']);
             $table->string('father_full_name');
             $table->string('mother_full_name');
             $table->string('email');

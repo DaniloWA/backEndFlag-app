@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class StudentController extends Controller
 {
@@ -22,9 +23,14 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-         return view('app.students');
+/*         $response = Http::get("http://127.0.0.1:8000/api/courses");
+
+        dd($response); */
+        $response = [];
+
+        return view('app.students',['studentsList' => $response]);
     }
 
     /**
@@ -45,7 +51,18 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $responseSucess = false;
+        $response = Http::get('https://api.thecatapi.com/v1/images/searcr');
+
+        dd($response->json());
+
+        if($response->successful()){
+            $responseSucess = true;
+        }
+
+
+
+        return view('app.students',['responseSucess' => $responseSucess,'studentsList' => $response]);
     }
 
     /**

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Student;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentRequest;
 use App\Repositories\Api\StudentRepository as ApiStudentRepository;
 
 class ApiStudentsController extends Controller
@@ -58,11 +60,26 @@ class ApiStudentsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->student->rules(),$this->student->feedback());
+        $validator = $request->validate($this->student->rules(),$this->student->feedback());
 
-        $student = $this->student->create($request->all());
+        $this->student->first_name = Str::lower($request->input('first_name'));
+        $this->student->last_name = Str::lower($request->input('last_name'));
+        //$this->student->nif = $request->input('nif');
+        $this->student->nif = 1234567890;
+        $this->student->status = $request->input('status');
+        $this->student->sex = $request->input('sex');
+        $this->student->father_full_name = Str::lower($request->input('father_full_name'));
+        $this->student->mother_full_name = Str::lower($request->input('mother_full_name'));
+        $this->student->email = Str::lower($request->input('email'));
+        $this->student->phone_num = $request->input('phone_num');
+        $this->student->country = Str::lower($request->input('country'));
+        $this->student->street_name = Str::lower($request->input('street_name'));
+        $this->student->postal_code = $request->input('postal_code');
+        $this->student->course_id = $request->input('course_id');
+        $this->student->save();
+        $student = $this->student;
 
-        return response()->json($student,201);
+        return response()->json(['success' => 'Student created', 'data' => $student],201);
     }
 
     /**

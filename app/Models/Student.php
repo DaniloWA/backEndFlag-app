@@ -48,7 +48,7 @@ class Student extends Model
         //'slug' => 'required',
         'first_name' => 'required|min:3',
         'last_name' => 'required|min:3',
-        'nif' => 'required|unique:students,nif,'.$this->id.'|min:9',
+        'nif' => 'required|unique:students,nif,'.$this->id.'|min:9|max:9',
         'status' => 'required|boolean',
         'sex' => 'required',
         'father_full_name' => 'required',

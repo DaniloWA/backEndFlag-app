@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('/students',ApiStudentsController::class);
+Route::apiResource('/students',ApiStudentsController::class)->name('store','api.students.store');
 Route::apiResource('/teachers', ApiTeacherController::class);
 Route::apiResource('/courses', ApiCourseController::class);
 Route::apiResource('/subjects', ApiSubjectController::class);
