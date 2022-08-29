@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
@@ -31,22 +32,6 @@ class Course extends Model
         'departament_id',
     ];
 
-    public function rules(){
-        return [
-        //'uuid' => 'required|unique:courses,uuid,'.$this->id.'',
-        //'slug' => 'required',
-        'name' => 'required|min:3',
-        'departament_id' => 'exists:departaments,id',
-        ];
-    }
-
-    public function feedback() {
-        return [
-            'required' => 'O campo :attribute é obrigatório',
-            //'uuid.unique' => 'O uuid do curso já existe!'
-        ];
-    }
-
     public static function boot()
     {
         parent::boot();
@@ -54,6 +39,14 @@ class Course extends Model
             $model->uuid = (string) Str::uuid();
             $model->slug = Str::slug($model->name);
         });
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
     }
 
     public function departament(){

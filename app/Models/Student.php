@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Student extends Model
@@ -42,32 +43,6 @@ class Student extends Model
         'course_id',
     ];
 
-    public function rules(){
-        return [
-        //'uuid' => 'required|unique:students,uuid,'.$this->id.'',
-        //'slug' => 'required',
-        'first_name' => 'required|min:3',
-        'last_name' => 'required|min:3',
-        'nif' => 'required|unique:students,nif,'.$this->id.'|min:9|max:9',
-        'status' => 'required|boolean',
-        'sex' => 'required',
-        'father_full_name' => 'required',
-        'mother_full_name' => 'required',
-        'email' => 'required|email|unique:students',
-        'phone_num' => 'required',
-        'country' => 'required',
-        'street_name' => 'required',
-        'postal_code' => 'required|min:4',
-        'course_id' => 'exists:courses,id',
-        ];
-    }
-
-    public function feedback() {
-        return [
-            'required' => 'O campo :attribute é obrigatório',
-            //'uuid.unique' => 'O UUID do estudante já existe!'
-        ];
-    }
 
     public static function boot()
     {
@@ -76,6 +51,61 @@ class Student extends Model
             $model->uuid = (string) Str::uuid();
             $model->slug = Str::slug($model->first_name. ' '.$model->last_name);
         });
+    }
+
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function lastName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function fatherFullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function motherFullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function country(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
+
+    protected function streetName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ucfirst($value),
+            set: fn ($value) => strtolower($value),
+        );
     }
 
     public function course(){
