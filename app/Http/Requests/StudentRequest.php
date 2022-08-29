@@ -23,7 +23,7 @@ class StudentRequest extends FormRequest
      */
     public function rules()
     {
-        /* return [
+        return [
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
             'nif' => 'required|unique:students,nif,'.$this->id.'|min:9|max:9',
@@ -40,10 +40,10 @@ class StudentRequest extends FormRequest
         ];
     }
 
-    public function feedback() {
+    public function messages() {
         return [
             'required' => 'O campo :attribute é obrigatório',
             //'uuid.unique' => 'O UUID do estudante já existe!'
-        ]; */
+        ];
     }
 }
