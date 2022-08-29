@@ -43,43 +43,30 @@ class ApiStudentsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StudentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        $validator = $request->validate($this->student->rules(),$this->student->feedback());
+        $student = Student::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'nif' => $request->input('nif'),
+            'status' => $request->input('status'),
+            'sex' => $request->input('sex'),
+            'father_full_name' => $request->input('father_full_name'),
+            'mother_full_name' => $request->input('mother_full_name'),
+            'email' => $request->input('email'),
+            'phone_num' => $request->input('phone_num'),
+            'country' => $request->input('country'),
+            'street_name' => $request->input('street_name'),
+            'postal_code' => $request->input('postal_code'),
+            'course_id' => $request->input('course_id'),
+        ]);
 
-        $this->student->first_name = Str::lower($request->input('first_name'));
-        $this->student->last_name = Str::lower($request->input('last_name'));
-        //$this->student->nif = $request->input('nif');
-        $this->student->nif = 1234567890;
-        $this->student->status = $request->input('status');
-        $this->student->sex = $request->input('sex');
-        $this->student->father_full_name = Str::lower($request->input('father_full_name'));
-        $this->student->mother_full_name = Str::lower($request->input('mother_full_name'));
-        $this->student->email = Str::lower($request->input('email'));
-        $this->student->phone_num = $request->input('phone_num');
-        $this->student->country = Str::lower($request->input('country'));
-        $this->student->street_name = Str::lower($request->input('street_name'));
-        $this->student->postal_code = $request->input('postal_code');
-        $this->student->course_id = $request->input('course_id');
-        $this->student->save();
-        $student = $this->student;
-
-        return response()->json(['success' => 'Student created', 'data' => $student],201);
+        return response()->json(['message' => 'Student created', 'data' => $student],201);
     }
 
     /**
@@ -92,55 +79,29 @@ class ApiStudentsController extends Controller
     {
         $student = $this->student->with('course')->find($id);
         if($student === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+            return response()->json(['message' => 'The searched resource does not exist!'],404);
         }
         return response()->json($student,200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Student $student)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Integer
+     * @param  App\Http\Requests\StudentRequest  $request
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
-
         $student = $this->student->find($id);
 
         if($student === null){
-            return response()->json('Impossivel realizar a atualização. O recurso solicitado não existe!',404);
-        }
-
-        if($request->method() === 'PATCH') {
-
-            $dynamicRules = [];
-
-            foreach($student->rules() as $input => $rule){
-                if(array_key_exists($input, $request->all())) {
-                    $dynamicRules[$input] = $rule;
-                };
-            };
-            $request->validate( $dynamicRules,$student->feedback());
-        } else {
-            $request->validate($student->rules(),$student->feedback());
+            return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
         }
 
         $student->update($request->all());
 
-        return response()->json($student,200);
+        return response()->json(['message' => 'Updated student', 'data' => $student],201);
     }
 
     /**
@@ -154,10 +115,10 @@ class ApiStudentsController extends Controller
         $student = $this->student->find($id);
 
         if($student === null){
-            return response()->json('Impossivel realizar a exclusão. O recurso solicitado não existe!',404);
+            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $student->delete();
-        return response()->json('A marca foi removida com sucesso!',200);
+        return response()->json(['message' => 'The student has been successfully removed!', 'data' => $student],200);
     }
 }

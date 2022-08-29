@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use App\Repositories\Api\CourseRepository;
 use Illuminate\Http\Request;
@@ -41,28 +42,19 @@ class ApiCourseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CourseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        $request->validate($this->course->rules(),$this->course->feedback());
+        $course = Course::create([
+            'name' => $request->input('name'),
+            'departament_id' => $request->input('departament_id'),
+        ]);
 
-        $course = $this->course->create($request->all());
-
-        return response()->json($course,201);
+        return response()->json(['message' => 'Course created', 'data' => $course],201);
     }
 
     /**
@@ -76,55 +68,29 @@ class ApiCourseController extends Controller
         $course = $this->course->with('departament')->find($id);
 
         if($course === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+           return response()->json(['message' => 'The searched resource does not exist!'],404);
         }
         return response()->json($course,200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Course $course)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Integer
+     * @param  App\Http\Requests\CourseRequest $request
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, $id)
     {
-
         $course = $this->course->find($id);
 
         if($course === null){
-            return response()->json('Impossivel realizar a atualização. O recurso solicitado não existe!',404);
-        }
-
-        if($request->method() === 'PATCH') {
-
-            $dynamicRules = [];
-
-            foreach($course->rules() as $input => $rule){
-                if(array_key_exists($input, $request->all())) {
-                    $dynamicRules[$input] = $rule;
-                };
-            };
-            $request->validate( $dynamicRules,$course->feedback());
-        } else {
-            $request->validate($course->rules(),$course->feedback());
+            return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
         }
 
         $course->update($request->all());
 
-        return response()->json($course,200);
+        return response()->json(['message' => 'Updated course', 'data' => $course],201);
     }
 
     /**
@@ -138,10 +104,10 @@ class ApiCourseController extends Controller
         $course = $this->course->find($id);
 
         if($course === null){
-            return response()->json('Impossivel realizar a exclusão. O recurso solicitado não existe!',404);
+            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $course->delete();
-        return response()->json('A marca foi removida com sucesso!',200);
+        return response()->json(['message' => 'The course has been successfully removed!', 'data' => $course],200);
     }
 }

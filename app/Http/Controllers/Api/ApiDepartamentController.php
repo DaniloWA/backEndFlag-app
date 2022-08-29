@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepartamentRequest;
 use App\Models\Departament;
 use App\Repositories\Api\DepartamentRepository;
 use Illuminate\Http\Request;
@@ -42,16 +43,6 @@ class ApiDepartamentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -84,49 +75,23 @@ class ApiDepartamentController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Departament  $departament
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Departament $departament)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Integer
+     * @param   App\Http\Requests\DepartamentRequest  $request
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartamentRequest $request, $id)
     {
-
         $departament = $this->departament->find($id);
 
         if($departament === null){
-            return response()->json('Impossivel realizar a atualização. O recurso solicitado não existe!',404);
-        }
-
-        if($request->method() === 'PATCH') {
-
-            $dynamicRules = [];
-
-            foreach($departament->rules() as $input => $rule){
-                if(array_key_exists($input, $request->all())) {
-                    $dynamicRules[$input] = $rule;
-                };
-            };
-            $request->validate( $dynamicRules,$departament->feedback());
-        } else {
-            $request->validate($departament->rules(),$departament->feedback());
+            return response()->json(['message' => 'Resource not found'],404);
         }
 
         $departament->update($request->all());
 
-        return response()->json($departament,200);
+        return response()->json(['message' => 'Updated departament', 'data' => $departament],201);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TeacherRequest;
 use App\Repositories\Api\TeacherRepository;
 
 class ApiTeacherController extends Controller
@@ -41,28 +42,21 @@ class ApiTeacherController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\TeacherRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        $request->validate($this->teacher->rules(),$this->teacher->feedback());
+        $teacher = Teacher::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'status' => $request->input('status'),
+            'departament_id' => $request->input('departament_id'),
+        ]);
 
-        $teacher = $this->teacher->create($request->all());
-
-        return response()->json($teacher,201);
+        return response()->json(['message' => 'Teacher created', 'data' => $teacher],201);
     }
 
     /**
@@ -73,59 +67,32 @@ class ApiTeacherController extends Controller
      */
     public function show($id)
     {
-
         $teacher = $this->teacher->with('departament')->find($id);
 
         if($teacher === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+            return response()->json(['message' => 'The searched resource does not exist!'],404);
         }
         return response()->json($teacher,200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(teacher $teacher)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Integer
+     * @param  App\Http\Requests\TeacherRequest  $request
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TeacherRequest $request, $id)
     {
-
         $teacher = $this->teacher->find($id);
 
         if($teacher === null){
-            return response()->json('Impossivel realizar a atualização. O recurso solicitado não existe!',404);
-        }
-
-        if($request->method() === 'PATCH') {
-
-            $dynamicRules = [];
-
-            foreach($teacher->rules() as $input => $rule){
-                if(array_key_exists($input, $request->all())) {
-                    $dynamicRules[$input] = $rule;
-                };
-            };
-            $request->validate( $dynamicRules,$teacher->feedback());
-        } else {
-            $request->validate($teacher->rules(),$teacher->feedback());
+           return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
         }
 
         $teacher->update($request->all());
 
-        return response()->json($teacher,200);
+        return response()->json(['message' => 'Updated teacher', 'data' => $teacher],201);
     }
 
     /**
@@ -139,10 +106,10 @@ class ApiTeacherController extends Controller
         $teacher = $this->teacher->find($id);
 
         if($teacher === null){
-            return response()->json('Impossivel realizar a exclusão. O recurso solicitado não existe!',404);
+            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $teacher->delete();
-        return response()->json('A marca foi removida com sucesso!',200);
+        return response()->json(['message' => 'The teacher has been successfully removed!', 'data' => $teacher],200);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use App\Repositories\Api\SubjectRepository;
 use Illuminate\Http\Request;
@@ -42,28 +43,22 @@ class ApiSubjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\SubjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        $request->validate($this->subject->rules(),$this->subject->feedback());
+        $subject = Subject::create([
+            'name' => $request->input('name'),
+            'workload' => $request->input('workload'),
+            'description' => $request->input('description'),
+            'num_registered_students' => $request->input('num_registered_students'),
+            'departament_id' => $request->input('departament_id'),
+        ]);
 
-        $subject = $this->subject->create($request->all());
-
-        return response()->json($subject,201);
+        return response()->json(['message' => 'Subject created', 'data' => $subject],201);
     }
 
     /**
@@ -77,56 +72,30 @@ class ApiSubjectController extends Controller
         $subject = $this->subject->with('departament')->find($id);
 
         if($subject === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+            return response()->json(['message' => 'The searched resource does not exist!'],404);
         }
 
         return response()->json($subject,200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(subject $subject)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Integer
+     * @param  App\Http\Requests\SubjectRequest  $request
+     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubjectRequest $request, $id)
     {
-
         $subject = $this->subject->find($id);
 
         if($subject === null){
-            return response()->json('Impossivel realizar a atualização. O recurso solicitado não existe!',404);
-        }
-
-        if($request->method() === 'PATCH') {
-
-            $dynamicRules = [];
-
-            foreach($subject->rules() as $input => $rule){
-                if(array_key_exists($input, $request->all())) {
-                    $dynamicRules[$input] = $rule;
-                };
-            };
-            $request->validate( $dynamicRules,$subject->feedback());
-        } else {
-            $request->validate($subject->rules(),$subject->feedback());
+            return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
         }
 
         $subject->update($request->all());
 
-        return response()->json($subject,200);
+        return response()->json(['message' => 'Updated subject', 'data' => $subject],201);
     }
 
     /**
@@ -140,10 +109,10 @@ class ApiSubjectController extends Controller
         $subject = $this->subject->find($id);
 
         if($subject === null){
-            return response()->json('Impossivel realizar a exclusão. O recurso solicitado não existe!',404);
+            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $subject->delete();
-        return response()->json('O subjecto foi removido com sucesso!',200);
+        return response()->json(['message' => 'The subject has been successfully removed!', 'data' => $subject],200);
     }
 }
