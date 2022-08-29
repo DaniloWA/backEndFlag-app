@@ -68,7 +68,7 @@ class ApiDepartamentController extends Controller
         $departament = $this->departament->with('course')->find($id);
 
         if($departament === null){
-            return response()->json('Recurso pesquisado não existe!',404);
+            return response()->json(['message' => 'The searched resource does not exist!'],404);
         }
 
         return response()->json($departament,200);
@@ -90,8 +90,7 @@ class ApiDepartamentController extends Controller
         }
 
         $departament->update($request->all());
-
-        return response()->json(['message' => 'Updated departament', 'data' => $departament],201);
+        return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
     }
 
     /**
