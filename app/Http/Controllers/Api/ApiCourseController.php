@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
-use App\Repositories\Api\CourseRepository;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 
 class ApiCourseController extends Controller
 {
+    use ApiResponser;
+
     public function __construct(Course $course){
         $this->course = $course;
     }
@@ -20,25 +21,11 @@ class ApiCourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $courseRepository = new CourseRepository($this->course);
+        $courses = $this->course->all();
 
-        if($request->has('departament_filters')){
-            $courseRepository->selectAttributesRelation('departament:id,'.$request->departament_filters);
-        } else {
-            $courseRepository->selectAttributesRelation('departament');
-        }
-
-        if($request->has('where_filters')){
-            $courseRepository->where_filters($request->where_filters);
-        }
-
-        if( $request->has('course_filters')){
-            $courseRepository->selectAttributes('departament_id,'.$request->course_filters);
-        }
-
-        return response()->json($courseRepository->getResult(), 200);
+        return $this->success(['courses' => $courses],'All Courses Loaded!');
     }
 
     /**
@@ -54,7 +41,7 @@ class ApiCourseController extends Controller
             'departament_id' => $request->input('departament_id'),
         ]);
 
-        return response()->json(['message' => 'Course created', 'data' => $course],201);
+        return $this->success(['course' => $course],'Course successfully created',201);
     }
 
     /**
@@ -68,9 +55,10 @@ class ApiCourseController extends Controller
         $course = $this->course->with('departament')->find($id);
 
         if($course === null){
-           return response()->json(['message' => 'The searched resource does not exist!'],404);
+           return $this->error('The searched resource does not exist',404);
         }
-        return response()->json($course,200);
+
+        return $this->success(['course' => $course],'Course successfully found!');
     }
 
     /**
@@ -85,12 +73,12 @@ class ApiCourseController extends Controller
         $course = $this->course->find($id);
 
         if($course === null){
-            return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
+            return $this->error('Unable to perform the update. The requested resource does not exist!',404);
         }
 
         $course->update($request->all());
 
-        return response()->json(['message' => 'Updated course', 'data' => $course],201);
+        return $this->success(['course' => $course],'Course successfully updated');
     }
 
     /**
@@ -104,10 +92,11 @@ class ApiCourseController extends Controller
         $course = $this->course->find($id);
 
         if($course === null){
-            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
+            return $this->error('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $course->delete();
-        return response()->json(['message' => 'The course has been successfully removed!', 'data' => $course],200);
+
+        return $this->success(['course' => $course],'The course has been successfully removed!');
     }
 }

@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DepartamentRequest;
 use App\Models\Departament;
-use App\Repositories\Api\DepartamentRepository;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 
 class ApiDepartamentController extends Controller
 {
+    use ApiResponser;
+
     public function __construct(Departament $departament){
         $this->departament = $departament;
     }
@@ -21,40 +22,26 @@ class ApiDepartamentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index()
     {
-        $departamentRepository = new DepartamentRepository($this->departament);
+        $departments = $this->departament->all();
 
-        if($request->has('course_filters')){
-            $departamentRepository->selectAttributesRelation('course:id,'.$request->course_filters);
-        } else {
-            $departamentRepository->selectAttributesRelation('course');
-        }
-
-        if($request->has('where_filters')){
-            $departamentRepository->where_filters($request->where_filters);
-        }
-
-        if( $request->has('departament_filters')){
-            $departamentRepository->selectAttributes($request->departament_filters);
-        }
-
-        return response()->json($departamentRepository->getResult(), 200);
+        return $this->success(['departments' => $departments],'All Departments Loaded!');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\DepartamentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartamentRequest $request)
     {
-        $request->validate($this->departament->rules(),$this->departament->feedback());
+        $departament = Departament::create([
+            'name' => $request->input('name')
+        ]);
 
-        $departament = $this->departament->create($request->all());
-
-        return response()->json($departament,201);
+        return $this->success(['department' => $departament],'Department successfully created',201);
     }
 
     /**
@@ -68,16 +55,16 @@ class ApiDepartamentController extends Controller
         $departament = $this->departament->with('course')->find($id);
 
         if($departament === null){
-            return response()->json(['message' => 'The searched resource does not exist!'],404);
+           return $this->error('The searched resource does not exist',404);
         }
 
-        return response()->json($departament,200);
+        return $this->success(['department' => $departament],'Department successfully found!');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param   App\Http\Requests\DepartamentRequest  $request
+     * @param  App\Http\Requests\DepartamentRequest  $request
      * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
@@ -86,11 +73,12 @@ class ApiDepartamentController extends Controller
         $departament = $this->departament->find($id);
 
         if($departament === null){
-            return response()->json(['message' => 'Resource not found'],404);
+            return $this->error('Unable to perform the update. The requested resource does not exist!',404);
         }
 
         $departament->update($request->all());
-        return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
+
+        return $this->success(['department' => $departament],'Department successfully updated');
     }
 
     /**
@@ -104,10 +92,11 @@ class ApiDepartamentController extends Controller
         $departament = $this->departament->find($id);
 
         if($departament === null){
-            return response()->json('Impossivel realizar a exclusão. O recurso solicitado não existe!',404);
+            return $this->error('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $departament->delete();
-        return response()->json('O departamento foi removido com sucesso!',200);
+
+        return $this->success(['department' => $departament],'The department has been successfully removed!');
     }
 }

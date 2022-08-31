@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
-use App\Repositories\Api\SubjectRepository;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 
 class ApiSubjectController extends Controller
 {
+    use ApiResponser;
+
      public function __construct(Subject $subject){
         $this->subject = $subject;
     }
@@ -21,25 +22,11 @@ class ApiSubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
+    public function index()
     {
-        $subjectRepository = new SubjectRepository($this->subject);
+        $subjects = $this->subject->all();
 
-        if($request->has('departament_filters')){
-            $subjectRepository->selectAttributesRelation('departament:id,'.$request->departament_filters);
-        } else {
-            $subjectRepository->selectAttributesRelation('courses');
-        }
-
-        if($request->has('where_filters')){
-            $subjectRepository->where_filters($request->where_filters);
-        }
-
-        if( $request->has('subject_filters')){
-            $subjectRepository->selectAttributes('departament_id,'.$request->subject_filters);
-        }
-
-        return response()->json($subjectRepository->getResult(), 200);
+        return $this->success(['subjects' => $subjects],'All Subjects Loaded!');
     }
 
     /**
@@ -58,7 +45,7 @@ class ApiSubjectController extends Controller
             'departament_id' => $request->input('departament_id'),
         ]);
 
-        return response()->json(['message' => 'Subject created', 'data' => $subject],201);
+        return $this->success(['subject' => $subject],'Subject successfully created',201);
     }
 
     /**
@@ -72,10 +59,10 @@ class ApiSubjectController extends Controller
         $subject = $this->subject->with('departament')->find($id);
 
         if($subject === null){
-            return response()->json(['message' => 'The searched resource does not exist!'],404);
+           return $this->error('The searched resource does not exist',404);
         }
 
-        return response()->json($subject,200);
+        return $this->success(['subject' => $subject],'Subject successfully found!');
     }
 
     /**
@@ -90,12 +77,12 @@ class ApiSubjectController extends Controller
         $subject = $this->subject->find($id);
 
         if($subject === null){
-            return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
+            return $this->error('Unable to perform the update. The requested resource does not exist!',404);
         }
 
         $subject->update($request->all());
 
-        return response()->json(['message' => 'Updated subject', 'data' => $subject],201);
+        return $this->success(['subject' => $subject],'Subject successfully updated');
     }
 
     /**
@@ -109,10 +96,10 @@ class ApiSubjectController extends Controller
         $subject = $this->subject->find($id);
 
         if($subject === null){
-            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
+            return $this->error('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $subject->delete();
-        return response()->json(['message' => 'The subject has been successfully removed!', 'data' => $subject],200);
+        return $this->success(['subject' => $subject],'The subject has been successfully removed!');
     }
 }

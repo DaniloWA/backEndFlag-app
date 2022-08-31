@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Student;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
-use App\Repositories\Api\StudentRepository as ApiStudentRepository;
+use App\Traits\ApiResponser;
 
 class ApiStudentsController extends Controller
 {
+    use ApiResponser;
+
     public function __construct(Student $student){
         $this->student = $student;
     }
@@ -21,25 +21,11 @@ class ApiStudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $studentRepository = new ApiStudentRepository($this->student);
+        $students = $this->student->all();
 
-        if($request->has('course_filters')){
-            $studentRepository->selectAttributesRelation('course:id,'.$request->course_filters);
-        } else {
-            $studentRepository->selectAttributesRelation('course');
-        }
-
-        if($request->has('where_filters')){
-            $studentRepository->where_filters($request->where_filters);
-        }
-
-        if( $request->has('student_filters')){
-            $studentRepository->selectAttributes('course_id,'.$request->student_filters);
-        }
-
-        return response()->json($studentRepository->getResult(), 200);
+        return $this->success(['students' => $students],'All Students Loaded!');
     }
 
     /**
@@ -66,7 +52,7 @@ class ApiStudentsController extends Controller
             'course_id' => $request->input('course_id'),
         ]);
 
-        return response()->json(['message' => 'Student created', 'data' => $student],201);
+        return $this->success(['student' => $student],'Student successfully created',201);
     }
 
     /**
@@ -79,9 +65,10 @@ class ApiStudentsController extends Controller
     {
         $student = $this->student->with('course')->find($id);
         if($student === null){
-            return response()->json(['message' => 'The searched resource does not exist!'],404);
+           return $this->error('The searched resource does not exist',404);
         }
-        return response()->json($student,200);
+
+        return $this->success(['student' => $student],'Student successfully found!');
     }
 
     /**
@@ -96,12 +83,12 @@ class ApiStudentsController extends Controller
         $student = $this->student->find($id);
 
         if($student === null){
-            return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
+            return $this->error('Unable to perform the update. The requested resource does not exist!',404);
         }
 
         $student->update($request->all());
 
-        return response()->json(['message' => 'Updated student', 'data' => $student],201);
+        return $this->success(['student' => $student],'Student successfully updated');
     }
 
     /**
@@ -115,10 +102,10 @@ class ApiStudentsController extends Controller
         $student = $this->student->find($id);
 
         if($student === null){
-            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
+            return $this->error('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $student->delete();
-        return response()->json(['message' => 'The student has been successfully removed!', 'data' => $student],200);
+        return $this->success(['student' => $student],'The student has been successfully removed!');
     }
 }

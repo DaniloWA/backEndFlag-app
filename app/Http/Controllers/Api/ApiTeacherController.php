@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Teacher;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherRequest;
-use App\Repositories\Api\TeacherRepository;
 
 class ApiTeacherController extends Controller
 {
+    use ApiResponser;
+
     public function __construct(Teacher $teacher){
         $this->teacher = $teacher;
     }
@@ -20,25 +21,11 @@ class ApiTeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $teacherRepository = new TeacherRepository($this->teacher);
+        $teachers = $this->teacher->all();
 
-        if($request->has('departament_filters')){
-            $teacherRepository->selectAttributesRelation('departament:id,'.$request->departament_filters);
-        } else {
-            $teacherRepository->selectAttributesRelation('departament');
-        }
-
-        if($request->has('where_filters')){
-            $teacherRepository->where_filters($request->where_filters);
-        }
-
-        if( $request->has('teacher_filters')){
-            $teacherRepository->selectAttributes('departament_id,'.$request->teacher_filters);
-        }
-
-        return response()->json($teacherRepository->getResult(), 200);
+        return $this->success(['teachers' => $teachers],'All Teachers Loaded!');
     }
 
     /**
@@ -56,7 +43,7 @@ class ApiTeacherController extends Controller
             'departament_id' => $request->input('departament_id'),
         ]);
 
-        return response()->json(['message' => 'Teacher created', 'data' => $teacher],201);
+        return $this->success(['teacher' => $teacher],'Teacher successfully created',201);
     }
 
     /**
@@ -70,9 +57,9 @@ class ApiTeacherController extends Controller
         $teacher = $this->teacher->with('departament')->find($id);
 
         if($teacher === null){
-            return response()->json(['message' => 'The searched resource does not exist!'],404);
+           return $this->error('The searched resource does not exist',404);
         }
-        return response()->json($teacher,200);
+        return $this->success(['teacher' => $teacher],'Teacher successfully found!');
     }
 
     /**
@@ -87,12 +74,12 @@ class ApiTeacherController extends Controller
         $teacher = $this->teacher->find($id);
 
         if($teacher === null){
-           return response()->json(['message' => 'Unable to perform the update. The requested resource does not exist!'],404);
+            return $this->error('Unable to perform the update. The requested resource does not exist!',404);
         }
 
         $teacher->update($request->all());
 
-        return response()->json(['message' => 'Updated teacher', 'data' => $teacher],201);
+        return $this->success(['teacher' => $teacher],'Teacher successfully updated');
     }
 
     /**
@@ -106,10 +93,10 @@ class ApiTeacherController extends Controller
         $teacher = $this->teacher->find($id);
 
         if($teacher === null){
-            return response()->json('Unable to perform deletion. The requested resource does not exist!',404);
+            return $this->error('Unable to perform deletion. The requested resource does not exist!',404);
         }
 
         $teacher->delete();
-        return response()->json(['message' => 'The teacher has been successfully removed!', 'data' => $teacher],200);
+        return $this->success(['teacher' => $teacher],'The teacher has been successfully removed!');
     }
 }
