@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\DefaultMessages;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TeacherRequest extends FormRequest
 {
+    use DefaultMessages;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,19 +25,25 @@ class TeacherRequest extends FormRequest
      */
     public function rules(){
         return [
-        //'uuid' => 'required|unique:teachers,uuid,'.$this->id.'',
-        //'slug' => 'required',
-        'first_name' => 'required|min:3',
-        'last_name' => 'required|min:3',
-        'status' => 'required',
-        'departament_id' => 'exists:departaments,id',
+        'first_name' => [
+            'required',
+            'min:3'
+        ],
+        'last_name' => [
+            'required',
+            'min:3'
+        ],
+        'status' => [
+            'required',
+        ],
+        'departament_id' => [
+            'exists:departaments,id'
+        ],
         ];
     }
 
     public function messages() {
-        return [
-            'required' => 'O campo :attribute é obrigatório',
-            //'uuid.unique' => 'O uuid do professor já existe!'
-        ];
-    }
+            $messages = $this->defaultMessage();
+            return $messages;
+        }
 }

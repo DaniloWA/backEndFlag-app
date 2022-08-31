@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Str;
+use App\Traits\DefaultMessages;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StudentRequest extends FormRequest
 {
+    use DefaultMessages;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,26 +27,58 @@ class StudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|min:3',
-            'last_name' => 'required|min:3',
-            'nif' => 'required|unique:students,nif,'.$this->id.'|min:9|max:9',
-            'status' => 'required|boolean',
-            'sex' => 'required',
-            'father_full_name' => 'required',
-            'mother_full_name' => 'required',
-            'email' => 'required|email|unique:students',
-            'phone_num' => 'required',
-            'country' => 'required',
-            'street_name' => 'required',
-            'postal_code' => 'required|min:4',
+            'first_name' => [
+                'required',
+                'min:3'
+            ],
+            'last_name' => [
+                'required',
+                'min:3'
+            ],
+            'nif' => [
+                'required',
+                'min:9',
+                'max:9',
+                "unique:students,nif,'.$this->id.",
+            ],
+            'status' => [
+                'required',
+                'boolean'
+            ],
+            'sex' => [
+                'required'
+            ],
+            'father_full_name' => [
+                'required'
+            ],
+            'mother_full_name' => [
+                'required'
+            ],
+            'email' => [
+                'required',
+                'email',
+                'unique:students'
+            ],
+            'phone_num' => [
+                'required'
+            ],
+            'country' =>  [
+                'required'
+            ],
+            'street_name' =>  [
+                'required'
+            ],
+            'postal_code' => [
+                'required',
+                'min:4'
+            ],
             'course_id' => 'exists:courses,id',
         ];
     }
 
     public function messages() {
-        return [
-            'required' => 'O campo :attribute é obrigatório',
-            //'uuid.unique' => 'O UUID do estudante já existe!'
-        ];
+            $messages = $this->defaultMessage();
+            //$messages['first_name.required'] = 'We need your [ '.Str::upper('name').' ] to continue!'; //Single message example
+        return $messages;
     }
 }
