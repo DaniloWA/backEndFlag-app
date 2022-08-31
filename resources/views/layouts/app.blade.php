@@ -37,13 +37,13 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('app.students') }}">{{ __('Students') }}</a>
+                                <a class="nav-link" href="{{ route('app.student.index') }}">{{ __('Students') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('app.teachers') }}">{{ __('Teachers') }}</a>
+                                <a class="nav-link" href="{{ route('app.teacher.index') }}">{{ __('Teachers') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('app.courses') }}">{{ __('Courses') }}</a>
+                                <a class="nav-link" href="{{ route('app.course.index') }}">{{ __('Courses') }}</a>
                             </li>
                         @endauth
                     </ul>
