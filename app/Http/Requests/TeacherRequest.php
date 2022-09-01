@@ -37,6 +37,7 @@ class TeacherRequest extends FormRequest
             'required',
         ],
         'departament_id' => [
+            'required',
             'exists:departaments,id'
         ],
         ];

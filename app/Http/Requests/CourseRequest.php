@@ -30,6 +30,7 @@ class CourseRequest extends FormRequest
                 'min:3'
             ],
             'departament_id' => [
+                'required',
                 'exists:departaments,id'
             ],
             ];

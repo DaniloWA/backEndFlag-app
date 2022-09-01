@@ -28,7 +28,7 @@ class DepartamentRequest extends FormRequest
         'name' => [
             'required',
             'min:3'
-        ],
+        ]
         ];
     }
 

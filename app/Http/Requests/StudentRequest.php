@@ -72,7 +72,10 @@ class StudentRequest extends FormRequest
                 'required',
                 'min:4'
             ],
-            'course_id' => 'exists:courses,id',
+            'course_id' => [
+                'required',
+                'exists:courses,id'
+            ],
         ];
     }
 

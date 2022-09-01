@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\DefaultMessages;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserLoginRequest extends FormRequest
 {
+    use DefaultMessages;
     /**
      * Determine if the user is authorized to make this request.
      *
