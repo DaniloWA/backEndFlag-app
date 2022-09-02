@@ -43,6 +43,10 @@ class Student extends Model
         'course_id',
     ];
 
+    protected $hidden = [
+        'id',
+        'course_id'
+    ];
 
     public static function boot()
     {

@@ -34,6 +34,11 @@ class Teacher extends Model
         'status',
     ];
 
+    protected $hidden = [
+        'id',
+        'departament_id'
+    ];
+
     public static function boot()
     {
         parent::boot();

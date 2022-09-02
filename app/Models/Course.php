@@ -32,6 +32,11 @@ class Course extends Model
         'departament_id',
     ];
 
+    protected $hidden = [
+        'id',
+        'departament_id'
+    ];
+
     public static function boot()
     {
         parent::boot();
@@ -40,6 +45,8 @@ class Course extends Model
             $model->slug = Str::slug($model->name);
         });
     }
+
+
 
     protected function name(): Attribute
     {

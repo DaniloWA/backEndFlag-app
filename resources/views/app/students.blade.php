@@ -128,8 +128,8 @@
                                             aria-label=".form-select-lg">
                                             <option selected></option>
                                             @foreach ($courses as $course)
-                                                <option value="{{ $course['id'] }}"
-                                                    {{ old('course_id') == $course['id'] ? 'selected' : '' }}>
+                                                <option value="{{ $course['uuid'] }}"
+                                                    {{ old('course_id') == $course['uuid'] ? 'selected' : '' }}>
                                                     {{ Str::ucfirst($course['name']) }}</option>
                                             @endforeach
                                         </select>
@@ -192,12 +192,12 @@
 
                                     @foreach ($students as $student)
                                         <tr>
-                                            <th scope="row">{{ $student['id'] }}</th>
+                                            <th scope="row">{{ $student['uuid'] }}</th>
                                             <td>{{ $student['first_name'] }}</td>
                                             <td>{{ $student['status'] }}</td>
                                             <td>{{ $student['email'] }}</td>
                                             <td>{{ $student['country'] }}</td>
-                                            <td>{{ $student['course_id'] }}</td>
+                                            <td>{{ $student['course_name'] }}</td>
                                             <td> <a href=""></a><button type="button"
                                                     class="btn btn-primary">Edit</button></td>
                                             <td> <a href=""><button type="button"

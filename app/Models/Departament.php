@@ -31,7 +31,9 @@ class Departament extends Model
         'slug',
     ];
 
-
+    protected $hidden = [
+        'id'
+    ];
     public static function boot()
     {
         parent::boot();
