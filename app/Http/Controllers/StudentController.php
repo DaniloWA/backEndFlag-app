@@ -48,7 +48,7 @@ class StudentController extends Controller
             $token = hasUserToken($request);
 
             Cache::remember('student.list', 60, function () use ($token)  {
-                $response = Http::withToken($token)->get("http://backEndFlag-app.test/api/students");
+                $response = Http::withToken($token)->get("http://backEndFlag-app.test/api/students",['with_course' => 'true']);
                 if($response->json() != null){
                     return $response->json()['data']['students'];
                 }

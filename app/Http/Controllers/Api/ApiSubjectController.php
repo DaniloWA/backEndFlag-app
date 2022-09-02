@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use App\Traits\ApiResponser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SubjectRequest;
 
 class ApiSubjectController extends Controller
 {
@@ -22,11 +24,21 @@ class ApiSubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = $this->subject->all();
+        $subjects = $this->subject;
 
-        return $this->success(['subjects' => $subjects],'All Subjects Loaded!');
+        if($request->has('with_department') && $request->with_department == true){
+            $subjects = $subjects
+                ->join('departaments', 'departaments.id', '=', 'subjects.departament_id')
+                ->select(DB::raw('departaments.uuid as department_uuid, departaments.name as department_name'),
+                        'subjects.*',
+                        );
+        };
+
+        $subjectsAll =  $subjects->get();
+
+        return $this->success(['subjects' => $subjectsAll],'All Subjects Loaded!');
     }
 
     /**
@@ -51,12 +63,11 @@ class ApiSubjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        $subject = $this->subject->with('departament')->find($id);
+        $subject = $this->subject->with('departament')->where('uuid', $uuid)->first();
 
         if($subject === null){
            return $this->error('The searched resource does not exist',404);
@@ -69,12 +80,11 @@ class ApiSubjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\SubjectRequest  $request
-     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SubjectRequest $request, $id)
+    public function update(SubjectRequest $request, $uuid)
     {
-        $subject = $this->subject->find($id);
+        $subject = $this->subject->where('uuid', $uuid)->first();
 
         if($subject === null){
             return $this->error('Unable to perform the update. The requested resource does not exist!',404);
@@ -88,12 +98,11 @@ class ApiSubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        $subject = $this->subject->find($id);
+        $subject = $this->subject->where('uuid', $uuid)->first();
 
         if($subject === null){
             return $this->error('Unable to perform deletion. The requested resource does not exist!',404);

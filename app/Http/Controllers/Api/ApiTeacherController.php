@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Teacher;
 use App\Traits\ApiResponser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherRequest;
 
@@ -21,11 +23,21 @@ class ApiTeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = $this->teacher->all();
+        $teachers = $this->teacher;
 
-        return $this->success(['teachers' => $teachers],'All Teachers Loaded!');
+        if($request->has('with_department') && $request->with_department == true){
+            $teachers = $teachers
+                ->join('departaments', 'departaments.id', '=', 'teachers.departament_id')
+                ->select(DB::raw('departaments.uuid as department_uuid, departaments.name as department_name'),
+                        'teachers.*',
+                        );
+        };
+
+        $teachersAll =  $teachers->get();
+
+        return $this->success(['teachers' => $teachersAll],'All Teachers Loaded!');
     }
 
     /**
@@ -49,12 +61,11 @@ class ApiTeacherController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        $teacher = $this->teacher->with('departament')->find($id);
+        $teacher = $this->teacher->with('departament')->where('uuid', $uuid)->first();
 
         if($teacher === null){
            return $this->error('The searched resource does not exist',404);
@@ -66,12 +77,11 @@ class ApiTeacherController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\TeacherRequest  $request
-     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TeacherRequest $request, $id)
+    public function update(TeacherRequest $request, $uuid)
     {
-        $teacher = $this->teacher->find($id);
+        $teacher = $this->teacher->where('uuid', $uuid)->first();
 
         if($teacher === null){
             return $this->error('Unable to perform the update. The requested resource does not exist!',404);
@@ -85,12 +95,11 @@ class ApiTeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        $teacher = $this->teacher->find($id);
+        $teacher = $this->teacher->where('uuid', $uuid)->first();
 
         if($teacher === null){
             return $this->error('Unable to perform deletion. The requested resource does not exist!',404);

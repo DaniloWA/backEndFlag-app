@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Student;
+use App\Traits\ApiResponser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
-use App\Traits\ApiResponser;
+
 
 class ApiStudentsController extends Controller
 {
@@ -21,11 +24,21 @@ class ApiStudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = $this->student->all();
+        $students = $this->student;
 
-        return $this->success(['students' => $students],'All Students Loaded!');
+        if($request->has('with_course') && $request->with_course == true){
+            $students = $students
+                ->join('courses', 'courses.id', '=', 'students.course_id')
+                ->select(DB::raw('courses.uuid as course_uuid, courses.name as course_name'),
+                        'students.*',
+                        );
+        };
+
+        $studentsAll =  $students->get();
+
+        return $this->success(['students' => $studentsAll],'All Students Loaded!');
     }
 
     /**
@@ -58,12 +71,11 @@ class ApiStudentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        $student = $this->student->with('course')->find($id);
+        $student = $this->student->with('course')->where('uuid', $uuid)->first();
         if($student === null){
            return $this->error('The searched resource does not exist',404);
         }
@@ -75,12 +87,11 @@ class ApiStudentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\StudentRequest  $request
-     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, $id)
+    public function update(StudentRequest $request, $uuid)
     {
-        $student = $this->student->find($id);
+        $student = $this->student->where('uuid', $uuid)->first();
 
         if($student === null){
             return $this->error('Unable to perform the update. The requested resource does not exist!',404);
@@ -94,12 +105,11 @@ class ApiStudentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        $student = $this->student->find($id);
+        $student = $this->student->where('uuid', $uuid)->first();
 
         if($student === null){
             return $this->error('Unable to perform deletion. The requested resource does not exist!',404);

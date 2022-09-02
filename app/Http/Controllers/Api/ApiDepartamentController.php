@@ -47,12 +47,12 @@ class ApiDepartamentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        $departament = $this->departament->with('course')->find($id);
+
+        $departament = $this->departament->where('uuid', $uuid)->first();
 
         if($departament === null){
            return $this->error('The searched resource does not exist',404);
@@ -65,12 +65,11 @@ class ApiDepartamentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\DepartamentRequest  $request
-     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DepartamentRequest $request, $id)
+    public function update(DepartamentRequest $request, $uuid)
     {
-        $departament = $this->departament->find($id);
+        $departament = $this->departament->where('uuid', $uuid)->first();
 
         if($departament === null){
             return $this->error('Unable to perform the update. The requested resource does not exist!',404);
@@ -87,9 +86,9 @@ class ApiDepartamentController extends Controller
      * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        $departament = $this->departament->find($id);
+        $departament = $this->departament->where('uuid', $uuid)->first();
 
         if($departament === null){
             return $this->error('Unable to perform deletion. The requested resource does not exist!',404);

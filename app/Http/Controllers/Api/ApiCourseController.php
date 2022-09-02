@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use App\Traits\ApiResponser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRequest;
 
 class ApiCourseController extends Controller
 {
@@ -21,11 +23,21 @@ class ApiCourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = $this->course->all();
+        $courses = $this->course;
 
-        return $this->success(['courses' => $courses],'All Courses Loaded!');
+        if($request->has('with_department') && $request->with_department == true){
+            $courses = $courses
+                ->join('departaments', 'departaments.id', '=', 'courses.departament_id')
+                ->select(DB::raw('departaments.uuid as department_uuid, departaments.name as department_name'),
+                        'courses.*',
+                        );
+        };
+
+        $coursesAll =  $courses->get();
+
+        return $this->success(['courses' => $coursesAll],'All Courses Loaded!');
     }
 
     /**
@@ -50,11 +62,11 @@ class ApiCourseController extends Controller
      * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        $course = $this->course->with('departament')->find($id);
+        $course = $this->course->with('departament')->where('uuid', $uuid)->first();
 
-        if($course === null){
+        if($course == null){
            return $this->error('The searched resource does not exist',404);
         }
 
@@ -65,12 +77,11 @@ class ApiCourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  App\Http\Requests\CourseRequest $request
-     * @param  Integer $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CourseRequest $request, $id)
+    public function update(CourseRequest $request, $uuid)
     {
-        $course = $this->course->find($id);
+        $course = $this->course->where('uuid', $uuid)->first();
 
         if($course === null){
             return $this->error('Unable to perform the update. The requested resource does not exist!',404);
@@ -84,12 +95,11 @@ class ApiCourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        $course = $this->course->find($id);
+        $course = $this->course->where('uuid', $uuid)->first();
 
         if($course === null){
             return $this->error('Unable to perform deletion. The requested resource does not exist!',404);
