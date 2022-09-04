@@ -9,7 +9,7 @@
 ### [Deslogando](#post-apiauthlogout)
 #### [Voltar pro Readme](/README.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -91,7 +91,7 @@
 
 [Início](#api-auth)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -169,7 +169,7 @@
 
 [Início](#api-auth)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -229,7 +229,7 @@
 
 [Início](#api-auth)
 
-<hr>
+---
 <br/>
 <br/>
 

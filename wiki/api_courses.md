@@ -10,7 +10,7 @@
 ### [Deletando](#del-coursesuuid)
 #### [Voltar pro Readme](/README.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -101,7 +101,7 @@
 
 [Início](#cursos)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -190,7 +190,7 @@
 
 [Início](#cursos)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -265,7 +265,7 @@
 
 [Início](#cursos)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -356,7 +356,7 @@
 
 [Início](#cursos)
 
-<hr>
+---
 <br/>
 <br/>
 

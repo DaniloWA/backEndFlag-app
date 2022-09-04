@@ -10,7 +10,7 @@
 ### [Deletando](#del-departmentsuuid)
 #### [Voltar pro Readme](/README.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -97,7 +97,7 @@
 
 [Início](#departamentos)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -155,7 +155,7 @@
 
 [Início](#departamentos)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -223,7 +223,7 @@
 
 [Início](#departamentos)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -310,7 +310,7 @@
 
 [Início](#departamentos)
 
-<hr>
+---
 <br/>
 <br/>
 

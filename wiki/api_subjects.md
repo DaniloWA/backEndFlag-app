@@ -10,7 +10,7 @@
 ### [Deletando](#del-subjectsuuid)
 #### [Voltar pro Readme](/README.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -116,7 +116,7 @@
 
 [Início](#matéria)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -211,7 +211,7 @@
 
 [Início](#matéria)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -289,7 +289,7 @@
 
 [Início](#matéria)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -389,7 +389,7 @@
 
 [Início](#matéria)
 
-<hr>
+---
 <br/>
 <br/>
 

@@ -10,7 +10,7 @@
 ### [Deletando](#del-teachersuuid)
 #### [Voltar pro Readme](/README.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -111,7 +111,7 @@
 
 [Início](#professores)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -204,7 +204,7 @@
 
 [Início](#professores)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -281,7 +281,7 @@
 
 [Início](#professores)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -376,7 +376,7 @@
 
 [Início](#professores)
 
-<hr>
+---
 <br/>
 <br/>
 

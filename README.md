@@ -6,7 +6,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 <br>
 
-<hr>
+---
 
 <br/>
 
@@ -48,7 +48,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
   - [Documentação Departamentos](/wiki/api_departments.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -99,7 +99,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 [Início](#api-gestão-universidade---projeto-final-backend-flag)
 
-<hr>
+---
 
 <br>
 <br>
@@ -117,6 +117,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 ```bash
   cd backEndFlag-app/
 ```
+
 ### Copiar ficheiro environment
 
 ```bash
@@ -170,7 +171,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 [Início](#api-gestão-universidade---projeto-final-backend-flag)
 
-<hr>
+---
 <br>
 <br>
 
@@ -178,6 +179,11 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ### Importar suite de endpoints para o [Postman](/postman) (ficheiros)
 
+```bash
+  cd ./postman
+```
+
+<br>
 
 ### Passo a Passo para importação do ficheiro do endpoint pelo GUI
 
@@ -189,9 +195,6 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ![import environment](/img/gif-import-environment-api.gif)
 
-```bash
-  cd ./postman
-```
 
 #### (Opcional) Para visualizar os dados dos endpoints
 
@@ -205,12 +208,6 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
   cat .\api_backendflag.postman_environment.json
 
 ```
-### Importar suite de endpoints para o Postman
-
-```bash
-  cd ./postman
-```
-<br>
 
 # Documentação das variaveis de environment 
 [Documentação](/wiki/postman.md) do Postman explicando variavies e scripts.
@@ -219,7 +216,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 [Início](#api-gestão-universidade---projeto-final-backend-flag)
 
-<hr>
+---
 <br>
 <br>
 
@@ -616,5 +613,13 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 <br>
 
 [Início](#api-gestão-universidade---projeto-final-backend-flag)
+
+---
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
 
 

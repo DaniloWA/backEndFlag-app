@@ -10,7 +10,7 @@
 ### [Deletando](#del-studentsuuid)
 #### [Voltar pro Readme](/README.md)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -123,7 +123,7 @@
 
 [Início](#estudantes)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -234,7 +234,7 @@
 
 [Início](#estudantes)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -320,7 +320,7 @@
 
 [Início](#estudantes)
 
-<hr>
+---
 <br/>
 <br/>
 
@@ -433,7 +433,7 @@
 
 [Início](#estudantes)
 
-<hr>
+---
 <br/>
 <br/>
 
