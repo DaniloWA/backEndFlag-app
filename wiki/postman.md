@@ -5,7 +5,7 @@
 ## Índice
 ### [Importando](#importando-suite)
 ### [Variáveis ambiente](#variáveis-environments)
-### [Secções endpoints](#secções)
+### [Seções endpoints](#seções)
 - [Auth](#api-auth)
 - [Estudantes](#students)
 - [Cursos](#courses)
@@ -81,7 +81,7 @@
 
 <br>
 
-# Secções
+# Seções
 
 <br>
 
