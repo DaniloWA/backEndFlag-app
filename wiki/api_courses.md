@@ -8,6 +8,7 @@
 ### [Pesquisa](#get-coursesuuid)
 ### [Atualizando](#put-coursesuuid)
 ### [Deletando](#del-coursesuuid)
+### [EER](#diagrama-eer)
 #### [Voltar pro Readme](/README.md)
 
 ---
@@ -422,3 +423,7 @@
 <br>
 
 [Início](#cursos)
+
+# Diagrama EER
+
+![eer](/img/eer-courses-rell-api.png)

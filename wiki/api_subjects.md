@@ -8,6 +8,7 @@
 ### [Pesquisa](#get-subjectsuuid)
 ### [Atualizando](#put-subjectsuuid)
 ### [Deletando](#del-subjectsuuid)
+### [EER](#diagrama-eer)
 #### [Voltar pro Readme](/README.md)
 
 ---
@@ -458,3 +459,6 @@
 <br>
 
 [Início](#matéria)
+
+# Diagrama EER
+![eer](/img/eer-subjects-rell-api.png)

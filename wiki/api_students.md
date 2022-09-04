@@ -8,6 +8,7 @@
 ### [Pesquisa](#get-studentsuuid)
 ### [Atualizando](#put-studentsuuid)
 ### [Deletando](#del-studentsuuid)
+### [EER](#diagrama-eer)
 #### [Voltar pro Readme](/README.md)
 
 ---
@@ -510,3 +511,6 @@
 <br>
 
 [Início](#estudantes)
+
+# Diagrama EER
+![eer](/img/eer-students-rell-api.png)

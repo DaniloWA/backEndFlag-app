@@ -8,6 +8,7 @@
 ### [Pesquisa](#get-teachersuuid)
 ### [Atualizando](#put-teachersuuid)
 ### [Deletando](#del-teachersuuid)
+### [EER](#diagrama-eer)
 #### [Voltar pro Readme](/README.md)
 
 ---
@@ -444,3 +445,6 @@
 <br>
 
 [Início](#professores)
+
+# Diagrama EER
+![eer](/img/eer-teachers-rell-api.png)

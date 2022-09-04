@@ -7,6 +7,7 @@
 ### [Logando](#post-apiauthlogin)
 ### [Usuário](#get-apiauthme)
 ### [Deslogando](#post-apiauthlogout)
+### [EER](#diagrama-eer)
 #### [Voltar pro Readme](/README.md)
 
 ---
@@ -285,4 +286,9 @@
 <br>
 
 [Início](#api-auth)
+
+
+# Diagrama EER
+![eer](/img/eer-auth-rell-api.png)
+
 

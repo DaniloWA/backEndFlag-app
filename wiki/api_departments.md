@@ -8,6 +8,7 @@
 ### [Pesquisa](#get-departmentsuuid)
 ### [Atualizando](#put-departmentsuuid)
 ### [Deletando](#del-departmentsuuid)
+### [EER](#diagrama-eer)
 #### [Voltar pro Readme](/README.md)
 
 ---
@@ -376,3 +377,6 @@
 <br>
 
 [Início](#departamentos)
+
+# Diagrama EER
+![eer](/img/eer-departments-rell-api.png)
