@@ -1,102 +1,762 @@
-# Postman Collection e Environment
+# Postman
 
-Facilitando os testes!
+<br/>
 
-## Instalação
+## Índice
+### [Importando](#importando-suite)
+### [Variáveis ambiente](#variáveis-environments)
+### [Secções endpoints](#secções)
+- [Auth](#api-auth)
+- [Estudantes](#students)
+- [Cursos](#courses)
+- [Professores](#teachers)
+- [Máterias](#subjects)
+- [Departamentos](#departments)
 
-Instale my-project com npm
+### [Scripts Variáveis](#scripts)
+### [Ordem de Testes](#ordem-de-uso)
+#### [Voltar pro Readme](/README.md)
 
-```bash
-  npm install my-project
-  cd my-project
-```
+---
+<br>
 
-## Rodando localmente
+# Importando suite
 
-Clone o projeto
-
-```bash
-  git clone https://link-para-o-projeto
-```
-
-Entre no diretório do projeto
-
-```bash
-  cd my-project
-```
-
-Instale as dependências
+### Importar suite de endpoints para o [Postman](/postman) (ficheiros)
 
 ```bash
-  npm install
+  cd ./postman
 ```
 
-Inicie o servidor
+<br>
+
+### Passo a Passo para importação do ficheiro do endpoint pelo GUI
+
+![import collection](/img/gif-import-collection-api.gif)
+
+<br>
+
+### Passo a Passo para importação do ficheiro do environment pelo GUI
+
+![import environment](/img/gif-import-environment-api.gif)
+
+
+#### (Opcional) Para visualizar os dados dos endpoints
 
 ```bash
-  npm run start
+  cat .\api_backendflag.postman_collection.json 
 ```
 
+#### (Opcional) Para visualizar os dados do ambiente local do environment
 
-## Documentação da API
+```bash
+  cat .\api_backendflag.postman_environment.json
 
-## Postman
+```
+<br>
 
-Para facilitar os testes na api estou disponibilizando a collection e o environment utilizado durante a criação da api!
+[Início](#postman)
 
-[Postman files](/postman)
+---
 
-Tem sua própria [Documentação](/postman/readme_postman.md). Recomendo dar uma olhada!
+<br>
 
-### Todos os Endpoints disponíveis
+# Variáveis environments
 
-#### Api Auth [mais informações](/wiki/endpoints/api_auth.md).
-- POST /api/auth/register
-- POST /api/auth/login
-- GET /api/auth/me
-- POST /api/auth/logout
+| Variáveis   | Descrição                           |
+| :---------- | :---------------------------------- |
+| `apiroute` | Url de todos os Endpoints|
+| `api_token` | Token de autenticação em todos os endpoints|
+| `course_uuid` | UUID da secção dos cursos |
+| `student_uuid` | UUID da secção dos estudantes |
+| `teacher_uuid` | UUID da secção dos professores |
+| `subject_uuid` | UUID da secção das máterias |
+| `department_uuid` | UUID da secção dos departamentos |
 
-#### Students [mais informações](/wiki/endpoints/students.md).
-- POST /api/students
-- GET /api/students
-- GET /api/students/${uuid}
-- PUT /api/students/${uuid}
-- DEL /api/students/${uuid}
+<br>
 
-#### Courses [mais informações](/wiki/endpoints/courses.md).
-- POST /api/courses
-- GET /api/courses
-- GET /api/courses/${uuid}
-- PUT /api/courses/${uuid}
-- DEL /api/courses/${uuid}
+[Início](#postman)
 
-#### Teachers [mais informações](/wiki/endpoints/teacher.md).
-- POST /api/teachers
-- GET /api/teachers
-- GET /api/teachers/${uuid}
-- PUT /api/teachers/${uuid}
-- DEL /api/teachers/${uuid}
+---
 
-#### Subjects [mais informações](/wiki/endpoints/students.md).
-- POST /api/subjects
-- GET /api/subjects
-- GET /api/subjects/${uuid}
-- PUT /api/subjects/${uuid}
-- DEL /api/subjects/${uuid}
+<br>
 
-#### Department [mais informações](/wiki/endpoints/department.md).
-- POST /api/epartment
-- GET /api/epartment
-- GET /api/epartment/${uuid}
-- PUT /api/epartment/${uuid}
-- DEL /api/epartment/${uuid}
+# Secções
 
-# Exemplo de response success
+<br>
 
-![Success Response](/img/example_response_success.png)
+## Api Auth  
 
-# Exemplo de response error
+#### API Register
 
-![Success Response](/img/example_response_error.png)
+> Rota utilizada para registrar usuário na api
+
+<br>
+
+```http
+  POST /api/auth/register
+```
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+#### API Login
+
+> Rota utilizada para logar usuário na api
+
+<br>
+
+```http
+  GET /api/auth/login
+```
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+#### Api User
+
+> Rota retorna usuário logado na api
+
+```http
+  GET /api/auth/me
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+#### Api Logout
+
+> Rota Desloga o usuário da api
+
+```http
+  POST /api/auth/logout
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
 
 
+
+## Students 
+
+#### Students - Store
+
+> Rota cria um estudante
+
+```http
+  POST /api/students
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Students - Index
+
+> Rota retorna todos os estudantes com os cursos ou sem.
+
+```http
+  GET /api/students
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+| params   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `with_course` | `true` | **Opicional**. Faz com que retorne o curso de cada usuario |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Students - Show
+
+> Retorna o usuario encontrado pelo UUID
+
+```http
+  GET /api/students/{{student_uuidd}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Students - Put
+
+> Rota atualiza um estudante pelo UUID
+
+```http
+  GET /api/students/{{student_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Students - Delete
+
+> Rota deleta um estudante pelo UUID
+
+```http
+  GET /api/students/{{student_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+## Courses 
+
+#### Courses - Store
+
+> Rota cria um curso
+
+```http
+  POST /api/courses
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Courses - Index
+
+> Rota retorna todos os cursos com os departamentos ou sem.
+
+```http
+  GET /api/courses
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+| params   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `with_department` | `true` | **Opicional**. Faz com que retorne o departamento de cada curso |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Courses - Show
+
+> Retorna o curso encontrado pelo UUID
+
+```http
+  GET /api/courses/{{course_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Courses - Put
+
+> Rota atualiza um curso pelo UUID
+
+```http
+  GET /api/courses/{{course_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Courses - Delete
+
+> Rota deleta um curso pelo UUID
+
+```http
+  GET /api/courses/{{course_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+## Teachers 
+
+#### Teachers - Store
+
+> Rota cria um professor
+
+```http
+  POST /api/teachers
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Teachers - Index
+
+> Rota retorna todos os professores com os departamentos ou sem.
+
+```http
+  GET /api/teachers
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+| params   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `with_department` | `true` | **Opicional**. Faz com que retorne o departamento de cada professor |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Teachers - Show
+
+> Retorna o professor encontrado pelo UUID
+
+```http
+  GET /api/teachers/{{teacher_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Teachers - Put
+
+> Rota atualiza um professor pelo UUID
+
+```http
+  GET /api/teachers/{{teacher_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Teachers - Delete
+
+> Rota deleta um professor pelo UUID
+
+```http
+  GET /api/teachers/{{teacher_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+## Subjects 
+
+#### Subjects - Store
+
+> Rota cria uma máteria
+
+```http
+  POST /api/subjects
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Subjects - Index
+
+> Rota retorna todos as máterias com os departamentos ou sem.
+
+```http
+  GET /api/subjects
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+| params   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `with_department` | `true` | **Opicional**. Faz com que retorne o departamento de cada máteria |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Subjects - Show
+
+> Retorna a máteria encontrada pelo UUID
+
+```http
+  GET /api/subjects/{{subject_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Subjects - Put
+
+> Rota atualiza uma máteria pelo UUID
+
+```http
+  GET /api/subjects/{{subject_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Subjects - Delete
+
+> Rota deleta uma máteria pelo UUID
+
+```http
+  GET /api/subjects/{{subject_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+## Departments 
+
+#### Departments  - Store
+
+> Rota cria um departamento
+
+```http
+  POST /api/departments
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Departments - Index
+
+> Rota retorna todos os departamentos.
+
+```http
+  GET /api/departments
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Departments - Show
+
+> Retorna um departamento encontrado pelo UUID
+
+```http
+  GET /api/departments/{{department_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Departments - Put
+
+> Rota atualiza um departamento pelo UUID
+
+```http
+  GET /api/departments/{{department_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+
+#### Departments - Delete
+
+> Rota deleta um departamento pelo UUID
+
+```http
+  GET /api/departments/{{department_uuid}}
+```
+
+| Headers   | value       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Authorization` | `Bearer {{api_token}}` | **Obrigatório**. Token do usuário |
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+# Scripts
+
+Os endpoints [Register](#api-register) e [Login](#api-login) teem esse script que preenche a variavel {{ api_token }} automaticamente assim que é feito a requisição de login ou register para facilitar o acesso ao resto das rotas!
+
+```javascript
+var response = JSON.parse(responseBody);
+
+postman.setEnvironmentVariable('api_token', response.data.token);
+```
+<br>
+
+Todos os endpoints - Store teem esse script para preencher as variaveis {{ [name]_uuid }}
+
+Agilizando o acesso as rotas de pesquisa, atualização e de remoção dos recursos.
+
+exemplo :
+```javascript
+var response = JSON.parse(responseBody);
+
+postman.setEnvironmentVariable('student_uuid', response.data.student.uuid);
+```
+
+<br>
+
+[Início](#postman)
+
+---
+
+<br>
+
+# Ordem de Uso
+
+Por questão dos scripts e variavies recomendo que sigam esse cronograma para um perfeito funcionamento da collection.
+
+#### Register ou Login
+> Assim será preenchido a variavel do Token de todas as rotas.
+
+#### Store, sempre primeiro!
+> Assim será preenchido a variavel do UUID da secção.
+
+<br>
+
+[Início](#postman)
