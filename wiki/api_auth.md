@@ -3,10 +3,10 @@
 <br/>
 
 ## Índice
-### 1 [Registrando](#post-apiauthregister)
-### 2 [Logando](#post-apiauthlogin)
-### 3 [Usuário](#get-apiauthme)
-### 4 [Deslogando](#post-apiauthlogout)
+### [Registrando](#post-apiauthregister)
+### [Logando](#post-apiauthlogin)
+### [Usuário](#get-apiauthme)
+### [Deslogando](#post-apiauthlogout)
 #### [Voltar pro Readme](/README.md)
 
 <hr>

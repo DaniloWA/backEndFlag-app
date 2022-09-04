@@ -11,42 +11,42 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 <br/>
 
 ## Índice
-### 1 [Tecnologias](#destaque-das-tecnologias-utilizadas)
+### [Tecnologias](#destaque-das-tecnologias-utilizadas)
 
-### 2 [Conceitos / Patterns](#destaque-dos-conceitos-e-patterns-utilizados)
+### [Conceitos / Patterns](#destaque-dos-conceitos-e-patterns-utilizados)
 
-### 3 [Pré-requisitos](#pré-requisitos)
+### [Pré-requisitos](#pré-requisitos)
 
-### 4 [Rodando localmente](#rodando-localmente)
+### [Rodando localmente](#rodando-localmente)
 
-### 5 [Postman](#postman)
-- 5.1 [Documentação interna Postman](/wiki/postman.md)
+### [Postman](#postman)
+- [Documentação interna Postman](/wiki/postman.md)
 
-### 6 [Documentação da API](#documentação-da-api)
+### [Documentação da API](#documentação-da-api)
 
-- 6.1 [Api Auth](#api-auth)
+- [Api Auth](#api-auth)
 
-  - 6.1.1 [Documentação Auth](/wiki/api_auth.md)
+  - [Documentação Auth](/wiki/api_auth.md)
 
-- 6.2 [Estudantes](#estudantes)
+- [Estudantes](#estudantes)
 
-  - 6.2.1 [Documentação Estudantes](/wiki/api_students.md)
+  - [Documentação Estudantes](/wiki/api_students.md)
 
-- 6.3 [Cursos](#cursos)
+- [Cursos](#cursos)
 
-  - 6.3.1 [Documentação Cursos](/wiki/api_courses.md)
+  - [Documentação Cursos](/wiki/api_courses.md)
 
-- 6.4 [Professores](#professores)
+- [Professores](#professores)
 
-  - 6.4.1 [Documentação Professores](/wiki/api_teachers.md)
+  - [Documentação Professores](/wiki/api_teachers.md)
 
-- 6.5 [Matérias](#matérias)
+- [Matérias](#matérias)
 
-  - 6.5.1 [Documentação Matérias](/wiki/api_subjects.md)
+  - [Documentação Matérias](/wiki/api_subjects.md)
 
-- 6.6 [Departamentos](#departamentos)
+- [Departamentos](#departamentos)
 
-  - 6.6.1 [Documentação Departamentos](/wiki/api_departments.md)
+  - [Documentação Departamentos](/wiki/api_departments.md)
 
 <hr>
 <br/>

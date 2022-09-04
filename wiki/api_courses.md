@@ -3,11 +3,11 @@
 <br/>
 
 ## Índice
-### 1 [Criando](#post-courses)
-### 2 [Todos os dados](#get-courses)
-### 3 [Pesquisa](#get-coursesuuid)
-### 4 [Atualizando](#put-coursesuuid)
-### 5 [Deletando](#del-coursesuuid)
+### [Criando](#post-courses)
+### [Todos os dados](#get-courses)
+### [Pesquisa](#get-coursesuuid)
+### [Atualizando](#put-coursesuuid)
+### [Deletando](#del-coursesuuid)
 #### [Voltar pro Readme](/README.md)
 
 <hr>
