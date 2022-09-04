@@ -4,6 +4,30 @@ Uma Api conceito para Gestão de universidades. Feito como projeto final no curs
 
 Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de gestão de uma universidade fictícia.
 
+<br>
+
+<hr>
+
+<br/>
+
+## Índice
+### 1 [Tecnologias](#destaque-das-tecnologias-utilizadas)
+### 2 [Conceitos / Patterns](#destaque-dos-conceitos-e-patterns-utilizados)
+### 3 [Pré-requisitos](#pré-requisitos)
+### 4 [Rodando localmente](#rodando-localmente)
+### 5 [Postman](#postman)
+### 5 [Documentação da API](#documentação-da-api)
+- 5.1 [Api Auth](#api-auth)
+- 5.2 [Estudantes](#estudantes)
+- 5.3 [Cursos](#cursos)
+- 5.4 [Professores](#professores)
+- 5.5 [Matérias](#matérias)
+- 5.6 [Departamentos](#departamentos)
+
+<hr>
+<br/>
+<br/>
+
 
 ## Destaque das tecnologias utilizadas
 
@@ -21,6 +45,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 | `Migration` | `---` | As migrações são como controle de versão para seu banco de dados, permitindo que sua equipe defina e compartilhe a definição do esquema de banco de dados do aplicativo.|
 | `PSR-4`|  `---` | A PSR-4 é uma recomendação da comunidade PHP para organização e carregamento de arquivos e classes PHP.|
 
+<br>
+<br>
+
 ## Destaque dos conceitos e patterns utilizados
 
 | Conceitos/Patterns    | Descrição                           |
@@ -35,6 +62,8 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 | `Provider pattern` | Disponibilize dados para vários componentes filhos.|
 | `Banco de dados relacional` | Um banco de dados relacional é um banco de dados que modela os dados de uma forma que eles sejam percebidos pelo usuário como tabelas, ou mais formalmente relações.|
 
+<br>
+
 ## Pré-requisitos
 
 - PHP ^8.1
@@ -42,7 +71,14 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 - Laravel 9.x
 - Servidor Linux
 
+<br>
+
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
 <hr>
+
+<br>
+<br>
 
 ## Rodando localmente
 
@@ -106,15 +142,24 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
   php artisan migrate --seed
 ```
 
+<br>
+
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
 <hr>
+<br>
+<br>
 
 # Postman
 
 ### Importar suite de endpoints para o [Postman](/postman) (ficheiros)
 
+
 ### Passo a Passo para importação do ficheiro do endpoint pelo GUI
 
 ![import collection](/img/gif-import-collection-api.gif)
+
+<br>
 
 ### Passo a Passo para importação do ficheiro do environment pelo GUI
 
@@ -141,20 +186,32 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 ```bash
   cd ./postman
 ```
+<br>
+
 # Documentação das variaveis de environment 
 [Documentação](/wiki/postman.md) do Postman explicando variavies e scripts.
 
+<br>
+
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
 <hr>
+<br>
+<br>
 
 # Documentação da API
 
 # [Api Auth](/wiki/api_auth.md)
+
+<br>
 
 ## POST /register
 
 ```
   http://[SUA_URL]/api/auth/register
 ```
+<br>
+
 #### BODY
 
 ![Body register](img/body_register.png)
@@ -174,7 +231,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
-#### Response
+<br>
+
+#### Response 200
 
 ![Response](img/response_success_register.png)
 
@@ -199,11 +258,16 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
+<br>
+
 ## POST /login
 
 ```
   http://[SUA_URL]/api/auth/login
 ```
+
+<br>
+
 #### BODY
 
 ![Body login](img/body_login.png)
@@ -220,8 +284,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
+<br>
 
-#### Response
+#### Response 200
 
 ![Response](img/response_success_login.png)
 
@@ -247,8 +312,15 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
+<br>
+
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
+<br>
 
 # [Estudantes](/wiki/api_students.md)
+
+<br>
 
 ## GET /students
 
@@ -263,7 +335,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
  }
 ```
 
-#### Response
+<br>
+
+#### Response 200
 
 ![Response](img/response_success_students.png)
 
@@ -301,9 +375,15 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
+<br>
 
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
+<br>
 
 # [Cursos](/wiki/api_courses.md)
+
+<br>
 
 ## GET /courses
 
@@ -318,7 +398,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
  }
 ```
 
-#### Response
+<br>
+
+#### Response 200
 
 ![Response](img/response_success_courses.png)
 
@@ -345,9 +427,15 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
+<br>
 
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
+<br>
 
 # [Professores](/wiki/api_teachers.md)
+
+<br>
 
 ## GET /teachers
 
@@ -362,7 +450,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
  }
 ```
 
-#### Response
+<br>
+
+#### Response 200
 
 ![Response](img/response_success_teachers.png)
 
@@ -391,9 +481,15 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 </details>
 
+<br>
 
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
+<br>
 
 # [Matérias](/wiki/api_subjects.md)
+
+<br>
 
 ## GET /subjects
 
@@ -408,7 +504,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
  }
 ```
 
-#### Response
+<br>
+
+#### Response 200
 
 ![Response](img/response_success_subjects.png)
 
@@ -439,8 +537,15 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 </details>
 
 
+<br>
+
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
+
+<br>
 
 # [Departamentos](/wiki/api_departments.md)
+
+<br>
 
 ## GET /departments
 
@@ -455,7 +560,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
  }
 ```
 
-#### Response
+<br>
+
+#### Response 200
 
 ![Response](img/response_success_departments.png)
 
@@ -481,5 +588,9 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 ```
 
 </details>
+
+<br>
+
+[Início](#api-gestão-universidade---projeto-final-backend-flag)
 
 
