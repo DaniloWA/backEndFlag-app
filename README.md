@@ -152,7 +152,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## POST /register
 
-```http
+```
   http://[SUA_URL]/api/auth/register
 ```
 #### BODY
@@ -201,7 +201,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## POST /login
 
-```http
+```
   http://[SUA_URL]/api/auth/login
 ```
 #### BODY
@@ -252,12 +252,12 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## GET /students
 
-```http
+```
   http://[SUA_URL]/api/students
 ```
 #### Header
 
-```bash
+```json
   { 
     "Authorization": "Bearer {{ token }}"
  }
@@ -307,12 +307,12 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## GET /courses
 
-```http
+```
   http://[SUA_URL]/api/courses
 ```
 #### Header
 
-```bash
+```json
   { 
     "Authorization": "Bearer {{ token }}"
  }
@@ -351,12 +351,12 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## GET /teachers
 
-```http
+```
   http://[SUA_URL]/api/teachers
 ```
 #### Header
 
-```bash
+```json
   { 
     "Authorization": "Bearer {{ token }}"
  }
@@ -397,12 +397,12 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## GET /subjects
 
-```http
+```
   http://[SUA_URL]/api/subjects
 ```
 #### Header
 
-```bash
+```json
   { 
     "Authorization": "Bearer {{ token }}"
  }
@@ -444,12 +444,12 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ## GET /departments
 
-```http
+```
   http://[SUA_URL]/api/departments
 ```
 #### Header
 
-```bash
+```json
   { 
     "Authorization": "Bearer {{ token }}"
  }
