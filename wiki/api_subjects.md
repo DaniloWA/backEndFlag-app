@@ -8,6 +8,7 @@
 ### 3 [Pesquisa](#get-subjectsuuid)
 ### 4 [Atualizando](#put-subjectsuuid)
 ### 5 [Deletando](#del-subjectsuuid)
+#### [Voltar pro Readme](/README.md)
 
 <hr>
 <br/>

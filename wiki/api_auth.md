@@ -7,6 +7,7 @@
 ### 2 [Logando](#post-apiauthlogin)
 ### 3 [Usuário](#get-apiauthme)
 ### 4 [Deslogando](#post-apiauthlogout)
+#### [Voltar pro Readme](/README.md)
 
 <hr>
 <br/>

@@ -8,6 +8,7 @@
 ### 3 [Pesquisa](#get-studentsuuid)
 ### 4 [Atualizando](#put-studentsuuid)
 ### 5 [Deletando](#del-studentsuuid)
+#### [Voltar pro Readme](/README.md)
 
 <hr>
 <br/>
