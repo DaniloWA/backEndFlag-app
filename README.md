@@ -1,10 +1,14 @@
-![eer](/img/png-eer-api-backend-flag.png)
+
 
 # Api Gestão universidade - Projeto Final Backend Flag
 
 Uma Api conceito para Gestão de universidades. Feito como projeto final no curso de desenvolvimento back-end no grupo flag cursos.
 
 Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de gestão de uma universidade fictícia.
+
+<br>
+
+![eer](/img/png-eer-api-backend-flag.png)
 
 <br>
 
