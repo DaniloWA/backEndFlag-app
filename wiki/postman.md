@@ -93,7 +93,7 @@
 
 <br>
 
-```http
+```
   POST /api/auth/register
 ```
 
@@ -111,7 +111,7 @@
 
 <br>
 
-```http
+```
   GET /api/auth/login
 ```
 
@@ -127,7 +127,7 @@
 
 > Rota retorna usuário logado na api
 
-```http
+```
   GET /api/auth/me
 ```
 
@@ -147,7 +147,7 @@
 
 > Rota Desloga o usuário da api
 
-```http
+```
   POST /api/auth/logout
 ```
 
@@ -171,7 +171,7 @@
 
 > Rota cria um estudante
 
-```http
+```
   POST /api/students
 ```
 
@@ -192,7 +192,7 @@
 
 > Rota retorna todos os estudantes com os cursos ou sem.
 
-```http
+```
   GET /api/students
 ```
 
@@ -217,7 +217,7 @@
 
 > Retorna o usuario encontrado pelo UUID
 
-```http
+```
   GET /api/students/{{student_uuidd}}
 ```
 
@@ -239,7 +239,7 @@
 
 > Rota atualiza um estudante pelo UUID
 
-```http
+```
   GET /api/students/{{student_uuid}}
 ```
 
@@ -260,7 +260,7 @@
 
 > Rota deleta um estudante pelo UUID
 
-```http
+```
   GET /api/students/{{student_uuid}}
 ```
 
@@ -282,7 +282,7 @@
 
 > Rota cria um curso
 
-```http
+```
   POST /api/courses
 ```
 
@@ -303,7 +303,7 @@
 
 > Rota retorna todos os cursos com os departamentos ou sem.
 
-```http
+```
   GET /api/courses
 ```
 
@@ -328,7 +328,7 @@
 
 > Retorna o curso encontrado pelo UUID
 
-```http
+```
   GET /api/courses/{{course_uuid}}
 ```
 
@@ -350,7 +350,7 @@
 
 > Rota atualiza um curso pelo UUID
 
-```http
+```
   GET /api/courses/{{course_uuid}}
 ```
 
@@ -371,7 +371,7 @@
 
 > Rota deleta um curso pelo UUID
 
-```http
+```
   GET /api/courses/{{course_uuid}}
 ```
 
@@ -393,7 +393,7 @@
 
 > Rota cria um professor
 
-```http
+```
   POST /api/teachers
 ```
 
@@ -414,7 +414,7 @@
 
 > Rota retorna todos os professores com os departamentos ou sem.
 
-```http
+```
   GET /api/teachers
 ```
 
@@ -439,7 +439,7 @@
 
 > Retorna o professor encontrado pelo UUID
 
-```http
+```
   GET /api/teachers/{{teacher_uuid}}
 ```
 
@@ -461,7 +461,7 @@
 
 > Rota atualiza um professor pelo UUID
 
-```http
+```
   GET /api/teachers/{{teacher_uuid}}
 ```
 
@@ -482,7 +482,7 @@
 
 > Rota deleta um professor pelo UUID
 
-```http
+```
   GET /api/teachers/{{teacher_uuid}}
 ```
 
@@ -504,7 +504,7 @@
 
 > Rota cria uma máteria
 
-```http
+```
   POST /api/subjects
 ```
 
@@ -525,7 +525,7 @@
 
 > Rota retorna todos as máterias com os departamentos ou sem.
 
-```http
+```
   GET /api/subjects
 ```
 
@@ -550,7 +550,7 @@
 
 > Retorna a máteria encontrada pelo UUID
 
-```http
+```
   GET /api/subjects/{{subject_uuid}}
 ```
 
@@ -572,7 +572,7 @@
 
 > Rota atualiza uma máteria pelo UUID
 
-```http
+```
   GET /api/subjects/{{subject_uuid}}
 ```
 
@@ -593,7 +593,7 @@
 
 > Rota deleta uma máteria pelo UUID
 
-```http
+```
   GET /api/subjects/{{subject_uuid}}
 ```
 
@@ -616,7 +616,7 @@
 
 > Rota cria um departamento
 
-```http
+```
   POST /api/departments
 ```
 
@@ -637,7 +637,7 @@
 
 > Rota retorna todos os departamentos.
 
-```http
+```
   GET /api/departments
 ```
 
@@ -658,7 +658,7 @@
 
 > Retorna um departamento encontrado pelo UUID
 
-```http
+```
   GET /api/departments/{{department_uuid}}
 ```
 
@@ -680,7 +680,7 @@
 
 > Rota atualiza um departamento pelo UUID
 
-```http
+```
   GET /api/departments/{{department_uuid}}
 ```
 
@@ -701,7 +701,7 @@
 
 > Rota deleta um departamento pelo UUID
 
-```http
+```
   GET /api/departments/{{department_uuid}}
 ```
 
