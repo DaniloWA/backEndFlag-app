@@ -21,31 +21,31 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 
 ### 5 [Postman](#postman)
 
-### 5 [Documentação da API](#documentação-da-api)
+### 6 [Documentação da API](#documentação-da-api)
 
-- 5.1 [Api Auth](#api-auth)
+- 6.1 [Api Auth](#api-auth)
 
-  - 5.1.1 [Documentação Auth](/wiki/api_auth.md)
+  - 6.1.1 [Documentação Auth](/wiki/api_auth.md)
 
-- 5.2 [Estudantes](#estudantes)
+- 6.2 [Estudantes](#estudantes)
 
-  - 5.2.1 [Documentação Estudantes](/wiki/api_students.md)
+  - 6.2.1 [Documentação Estudantes](/wiki/api_students.md)
 
-- 5.3 [Cursos](#cursos)
+- 6.3 [Cursos](#cursos)
 
-  - 5.3.1 [Documentação Cursos](/wiki/api_courses.md)
+  - 6.3.1 [Documentação Cursos](/wiki/api_courses.md)
 
-- 5.4 [Professores](#professores)
+- 6.4 [Professores](#professores)
 
-  - 5.4.1 [Documentação Professores](/wiki/api_teachers.md)
+  - 6.4.1 [Documentação Professores](/wiki/api_teachers.md)
 
-- 5.5 [Matérias](#matérias)
+- 6.5 [Matérias](#matérias)
 
-  - 5.5.1 [Documentação Matérias](/wiki/api_subjects.md)
+  - 6.5.1 [Documentação Matérias](/wiki/api_subjects.md)
 
-- 5.6 [Departamentos](#departamentos)
+- 6.6 [Departamentos](#departamentos)
 
-  - 5.6.1 [Documentação Departamentos](/wiki/api_departments.md)
+  - 6.6.1 [Documentação Departamentos](/wiki/api_departments.md)
 
 <hr>
 <br/>
