@@ -20,6 +20,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 ### 4 [Rodando localmente](#rodando-localmente)
 
 ### 5 [Postman](#postman)
+- 5.1 [Documentação interna Postman](/wiki/postman.md)
 
 ### 6 [Documentação da API](#documentação-da-api)
 
