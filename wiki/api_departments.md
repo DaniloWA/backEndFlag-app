@@ -115,14 +115,6 @@
  }
 ```
 
-#### (Opicional) Params
-
-```json
-  { 
-    "with_department": "true"
- }
-```
-
 <br/>
 
 #### Response Success 200

@@ -10,7 +10,7 @@
 - [Estudantes](#students)
 - [Cursos](#courses)
 - [Professores](#teachers)
-- [Máterias](#subjects)
+- [Matérias](#subjects)
 - [Departamentos](#departments)
 
 ### [Scripts Variáveis](#scripts)
@@ -44,13 +44,13 @@
 #### (Opcional) Para visualizar os dados dos endpoints
 
 ```bash
-  cat .\api_backendflag.postman_collection.json 
+  cat .\postman\api_backendflag.postman_collection.json 
 ```
 
 #### (Opcional) Para visualizar os dados do ambiente local do environment
 
 ```bash
-  cat .\api_backendflag.postman_environment.json
+  cat .\postman\api_backendflag.postman_environment.json
 
 ```
 <br>
@@ -70,7 +70,7 @@
 | `course_uuid` | UUID da secção dos cursos |
 | `student_uuid` | UUID da secção dos estudantes |
 | `teacher_uuid` | UUID da secção dos professores |
-| `subject_uuid` | UUID da secção das máterias |
+| `subject_uuid` | UUID da secção das matérias |
 | `department_uuid` | UUID da secção dos departamentos |
 
 <br>
@@ -202,7 +202,7 @@
 
 | params   | value       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `with_course` | `true` | **Opicional**. Faz com que retorne o curso de cada usuario |
+| `with_course` | `true` | **Opcional**. Faz com que retorne o curso de cada usuário |
 
 <br>
 
@@ -215,7 +215,7 @@
 
 #### Students - Show
 
-> Retorna o usuario encontrado pelo UUID
+> Retorna o usuário encontrado pelo UUID
 
 ```
   GET /api/students/{{student_uuidd}}
@@ -313,7 +313,7 @@
 
 | params   | value       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `with_department` | `true` | **Opicional**. Faz com que retorne o departamento de cada curso |
+| `with_department` | `true` | **Opcional**. Faz com que retorne o departamento de cada curso |
 
 <br>
 
@@ -424,7 +424,7 @@
 
 | params   | value       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `with_department` | `true` | **Opicional**. Faz com que retorne o departamento de cada professor |
+| `with_department` | `true` | **Opcional**. Faz com que retorne o departamento de cada professor |
 
 <br>
 
@@ -502,7 +502,7 @@
 
 #### Subjects - Store
 
-> Rota cria uma máteria
+> Rota cria uma matérias
 
 ```
   POST /api/subjects
@@ -523,7 +523,7 @@
 
 #### Subjects - Index
 
-> Rota retorna todos as máterias com os departamentos ou sem.
+> Rota retorna todos as matérias com os departamentos ou sem.
 
 ```
   GET /api/subjects
@@ -535,7 +535,7 @@
 
 | params   | value       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `with_department` | `true` | **Opicional**. Faz com que retorne o departamento de cada máteria |
+| `with_department` | `true` | **Opcional**. Faz com que retorne o departamento de cada matéria |
 
 <br>
 
@@ -548,7 +548,7 @@
 
 #### Subjects - Show
 
-> Retorna a máteria encontrada pelo UUID
+> Retorna a matéria encontrada pelo UUID
 
 ```
   GET /api/subjects/{{subject_uuid}}
@@ -570,7 +570,7 @@
 
 #### Subjects - Put
 
-> Rota atualiza uma máteria pelo UUID
+> Rota atualiza uma matéria pelo UUID
 
 ```
   GET /api/subjects/{{subject_uuid}}
@@ -591,7 +591,7 @@
 
 #### Subjects - Delete
 
-> Rota deleta uma máteria pelo UUID
+> Rota deleta uma matéria pelo UUID
 
 ```
   GET /api/subjects/{{subject_uuid}}
@@ -719,7 +719,7 @@
 
 # Scripts
 
-Os endpoints [Register](#api-register) e [Login](#api-login) teem esse script que preenche a variavel {{ api_token }} automaticamente assim que é feito a requisição de login ou register para facilitar o acesso ao resto das rotas!
+Os endpoints [Register](#api-register) e [Login](#api-login) teem esse script que preenche a variável {{ api_token }} automaticamente assim que é feito a requisição de login ou register para facilitar o acesso ao resto das rotas!
 
 ```javascript
 var response = JSON.parse(responseBody);
@@ -728,7 +728,7 @@ postman.setEnvironmentVariable('api_token', response.data.token);
 ```
 <br>
 
-Todos os endpoints - Store teem esse script para preencher as variaveis {{ [name]_uuid }}
+Todos os endpoints - Store teem esse script para preencher as variáveis {{ [name]_uuid }}
 
 Agilizando o acesso as rotas de pesquisa, atualização e de remoção dos recursos.
 
@@ -749,13 +749,13 @@ postman.setEnvironmentVariable('student_uuid', response.data.student.uuid);
 
 # Ordem de Uso
 
-Por questão dos scripts e variavies recomendo que sigam esse cronograma para um perfeito funcionamento da collection.
+Por questão dos scripts e variáveis recomendo que sigam esse cronograma para um perfeito funcionamento da collection.
 
 #### Register ou Login
-> Assim será preenchido a variavel do Token de todas as rotas.
+> Assim será preenchido a variável do Token de todas as rotas.
 
 #### Store, sempre primeiro!
-> Assim será preenchido a variavel do UUID da secção.
+> Assim será preenchido a variável do UUID da secção.
 
 <br>
 

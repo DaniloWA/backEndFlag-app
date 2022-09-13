@@ -144,7 +144,7 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 ```
 
 ### Definir configuração da conexão da base de dados
-#### Subistitui essas linhas no ficheiro ./.env
+#### Substitui essas linhas no ficheiro ./.env
 
 ```bash
   DB_CONNECTION=mysql
@@ -205,18 +205,18 @@ Esse é um projeto desenvolvido em Laravel 9, que visa resolver um problema de g
 #### (Opcional) Para visualizar os dados dos endpoints
 
 ```bash
-  cat .\api_backendflag.postman_collection.json 
+  cat .\postman\api_backendflag.postman_collection.json 
 ```
 
 #### (Opcional) Para visualizar os dados do ambiente local do environment
 
 ```bash
-  cat .\api_backendflag.postman_environment.json
+  cat .\postman\api_backendflag.postman_environment.json
 
 ```
 
-# Documentação das variaveis de environment 
-[Documentação](/wiki/postman.md) do Postman explicando variavies e scripts.
+# Documentação das variáveis de environment  
+[Documentação](/wiki/postman.md) do Postman explicando variáveis e scripts.
 
 <br>
 

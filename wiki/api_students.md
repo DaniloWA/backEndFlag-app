@@ -141,7 +141,7 @@
  }
 ```
 
-#### (Opicional) Params
+#### (Opcional) Params
 
 ```json
   { 
@@ -191,7 +191,7 @@
 
 <br/>
 
-#### Response Success com parametro 200
+#### Response Success com parâmetro 200
 
 ![Response](/img/response_success_params_students.png)
 

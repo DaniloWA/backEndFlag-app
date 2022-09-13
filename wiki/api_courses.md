@@ -119,7 +119,7 @@
  }
 ```
 
-#### (Opicional) Params
+#### (Opcional) Params
 
 ```json
   { 
