@@ -21,11 +21,6 @@ use App\Http\Controllers\TeacherController;
 Auth::routes();
 
 Route::get('/',function(){ return redirect()->route('app.home');});
-/*
-Route::fallback(function(){
-    return redirect()->route('app.home');
-}); */
-
 
 Route::prefix('app')->group(function () {
     // Endpoint Home
@@ -51,20 +46,6 @@ Route::prefix('app')->group(function () {
     Route::get('/courses/{course} ', [CourseController::class, 'show'])->name('app.course.show');
     Route::put('/courses/{course} ', [CourseController::class, 'update'])->name('app.course.update');
     Route::delete('/courses/{course} ', [CourseController::class, 'destroy'])->name('app.course.delete');
-
-/*     // Endpoint Department
-    Route::get('/departments ', [DepartamentController::class, 'index'])->name('app.department.index');
-    Route::post('/departments ', [DepartamentController::class, 'store'])->name('app.department.store');
-    Route::get('/departments/{departments} ', [DepartamentController::class, 'show'])->name('app.department.show');
-    Route::put('/departments/{departments} ', [DepartamentController::class, 'update'])->name('app.department.update');
-    Route::delete('/departments/{departments} ', [DepartamentController::class, 'destroy'])->name('app.department.delete'); */
-/*
-    // Endpoint subject
-    Route::get('/subjects ', [SubjectController::class, 'index'])->name('app.subject.index');
-    Route::post('/subjects ', [SubjectController::class, 'store'])->name('app.subject.store');
-    Route::get('/subjects/{subject} ', [SubjectController::class, 'show'])->name('app.subject.show');
-    Route::put('/subjects/{subject} ', [SubjectController::class, 'update'])->name('app.subject.update');
-    Route::delete('/subjects/{subject} ', [SubjectController::class, 'destroy'])->name('app.subject.delete'); */
 });
 
 

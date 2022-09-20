@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 if (! function_exists('getToken')) {
     function getToken(){

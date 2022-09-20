@@ -1,9 +1,6 @@
 <?php
 namespace App\Traits;
 
-/**
- *
- */
 trait ApiResponser{
 
     protected function success($data, string $message = null, int $code = 200){
